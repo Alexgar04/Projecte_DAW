@@ -1,5 +1,6 @@
 package com.projecte.main;
 
+import com.projecte.hector.MostrarHector;
 //import com.projecte.Alex.MostrarAlex;
 import com.projecte.sergi.MostrarSergi;
 
@@ -10,6 +11,9 @@ public class Main {
 //		MostrarAlex mostraralex = new MostrarAlex();
 		mostrarsergi.mostrarSergi();
 //		mostraralex.mostrarAlex();
+		
+		MostrarHector mostrarhector=new MostrarHector();
+		mostrarhector.mostrarHector();
 
 	}
 
