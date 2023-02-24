@@ -4,7 +4,7 @@ import com.projecte.hector.MostrarHector;
 //import com.projecte.Alex.MostrarAlex;
 import com.projecte.sergi.MostrarSergi;
 
-public class Main {
+public class ProgramaPrincipal {
 
 	public static void main(String[] args) {
 		MostrarSergi mostrarsergi = new MostrarSergi();
