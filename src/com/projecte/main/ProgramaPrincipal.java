@@ -1,20 +1,27 @@
 package com.projecte.main;
 
-import com.projecte.hector.MostrarHector;
-//import com.projecte.Alex.MostrarAlex;
-import com.projecte.sergi.MostrarSergi;
+import com.projecte.alex.Menu;
+import com.projecte.alex.Registro;
 
 public class ProgramaPrincipal {
 
 	public static void main(String[] args) {
-		MostrarSergi mostrarsergi = new MostrarSergi();
+//		MostrarSergi mostrarsergi = new MostrarSergi();
 //		MostrarAlex mostraralex = new MostrarAlex();
-		mostrarsergi.mostrarSergi();
+//		mostrarsergi.mostrarSergi();
 //		mostraralex.mostrarAlex();
+//		
+//		MostrarHector mostrarhector=new MostrarHector();
+//		mostrarhector.mostrarHector();
+		Menu mostrarM = new Menu();
+		int opcionUser = mostrarM.mostrarMenu();
+		if (opcionUser == 1) {
+			
+		}else {
+			Registro reg = new Registro(opcionUser);
+		}
 		
-		MostrarHector mostrarhector=new MostrarHector();
-		mostrarhector.mostrarHector();
-
+		
 	}
 
 }
