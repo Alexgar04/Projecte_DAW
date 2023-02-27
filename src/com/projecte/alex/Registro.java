@@ -22,7 +22,7 @@ public class Registro {
 
 	public Registro(int opcionUser){
 		String nombreUser = PedirUser();
-		File User = new File("/ProjecteDAW/Usuarios/"+nombreUser);
+		File User = new File("Usuarios/"+nombreUser);
 		if (User.exists()) {
 			System.out.println("El usuario introducido ya existe, prueba iniciando sesion");
 			System.out.println("**********************************************");
@@ -74,7 +74,7 @@ public class Registro {
 	}
 	
 	public void escribirInformacion(String nombreUser, String nomApell, String poblacion,String contraseña) {
-		File escInfo = new File("/ProjecteDAW/UsersInfo/UsersInfo.txt");
+		File escInfo = new File("UsersInfo/UsersInfo.txt");
         try {
 			FileWriter escribir = new FileWriter(escInfo, true);
 			escribir.write("ID Usuario: "+ id +"\n");
