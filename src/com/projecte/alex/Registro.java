@@ -5,9 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 public class Registro {
-	public int id = 1;
 	Scanner entrada = new Scanner(System.in);
-	
+	private static int id = 1;
 	private int opcionUser;
 	
 
@@ -77,13 +76,7 @@ public class Registro {
 		File escInfo = new File("UsersInfo/UsersInfo.txt");
         try {
 			FileWriter escribir = new FileWriter(escInfo, true);
-			escribir.write("ID Usuario: "+ id +"\n");
-			id++;
-			escribir.write("Nombre Usuario: "+nombreUser+"\n");
-			escribir.write("Nombre y Apellidos: "+nomApell+"\n");
-			escribir.write("Poblacion: "+poblacion+"\n");
-			escribir.write("Contraseña: "+contraseña+"\n");
-			escribir.write("------------------------------------------------"+"\n");
+			escribir.write(id+"::"+nombreUser+"::"+nomApell+"::"+poblacion+"::"+contraseña);
 			escribir.close();
 			
 			
