@@ -2,6 +2,7 @@ package com.projecte.main;
 
 import com.projecte.alex.Menu;
 import com.projecte.alex.Registro;
+import com.projecte.hector.IniciSesio;
 
 public class ProgramaPrincipal {
 
@@ -15,7 +16,10 @@ public class ProgramaPrincipal {
 //		mostrarhector.mostrarHector();
 		Menu mostrarM = new Menu();
 		int opcionUser = mostrarM.mostrarMenu();
+		
 		if (opcionUser == 1) {
+			IniciSesio iniciSesio=new IniciSesio();
+			
 			
 		}else {
 			Registro reg = new Registro(opcionUser);
