@@ -1,9 +1,14 @@
 package com.projecte.hector;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+
+import com.projecte.alex.Comprobacion;
+import com.projecte.alex.Menu;
 
 public class IniciSesio {
 
@@ -17,48 +22,63 @@ public class IniciSesio {
 		this.opcionUser = opcionUser;
 	}
 
-	private void introduirDades(int opciopUser) {
+	public IniciSesio(int opciopUser) {
 		// El usuari introdueix el nom per teclat i la contrasenya per a comprobarla.
 		Scanner entrada = new Scanner(System.in);
-		System.out.print("Introduzca el nombre de usuario: ");
+		System.out.println("Introduzca el nombre de usuario: ");
 		String usuario = entrada.nextLine();
-		System.out.print("Introduzca la contraseña: ");
+		System.out.println("Introduzca la contraseña: ");
 		String contrasena = entrada.nextLine();
+		verificarCredenciales(usuario, contrasena);
 
-		// Verificar les credencials del usuaris.
-		if (verificarCredenciales(usuario, contrasena)) {
-			System.out.println("Inicio de sesión exitoso");
-			// Si son correctes segueix en lo seguent.
-		} else {
-			System.out.println("Nombre de usuario o contraseña incorrectos");
-			// Mostrar mensatge de error y torna al formulari de nou.
-		}
 	}
 
-	// Aquest metode se encarrega de llegir el que hi ha escrit al fitxer de text.
-
-	public static boolean verificarCredenciales(String usuario, String contrasena) {
-		// Lig les dades de UsersInfo.txt y comprova si son reals
-		try (BufferedReader llegirdades = new BufferedReader(new FileReader("UsersInfo\\UsersInfo.txt"))) {
-			String linea;
-			while ((linea = llegirdades.readLine()) != null) {
-				// Separar el nom de usuari i contrasenya en un array separant a partir dels ::
-				String[] datosUsuari = linea.split("::");
-				String usuarioIntroduit = datosUsuari[1];
-				String contrasenaIntroduit = datosUsuari[5];
-
-				// Verificar si el nom de usuari i la contrasenya coincidisen
-				if (usuario.equals(usuarioIntroduit) && contrasena.equals(contrasenaIntroduit)) {
-					return true;
+	public static void verificarCredenciales(String usuario, String contrasena) {
+		File compUsuario = new File("Usuarios/"+usuario);
+	    if (compUsuario.exists()) {
+	       File comprobacion = new File("UsersInfo/UsersInfo.txt");
+	       try {
+			Scanner leer = new Scanner(comprobacion);
+			String pepe = "hol";
+			boolean hola = false;
+			while(!hola) {
+				
+				
+					String linea = leer.nextLine();
+					String[] arrayLinea = linea.split("::");
+					String contrasena_b = arrayLinea[6];
+					if(contrasena_b.equals(contrasena)) {
+						System.out.println("Usuario correcto");
+						hola = true;
+						
+					}
+					else {
+						System.out.println("Contraseña incorrectaa");
+						pepe = "hola";
+						hola = true;
+						
+					
 				}
 			}
-		} catch (IOException e) {
+			
+			if(pepe.equals("hola")) {
+				Comprobacion c = new Comprobacion();
+		        c.comprobacion();
+			}
+			
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	       
+	    } else {
+	        System.out.println("El usuario introducido no existe");
+	        Comprobacion c = new Comprobacion();
+            c.comprobacion();
+		}
+		// Lig les dades de UsersInfo.txt y comprova si son reals
 
 		// Si no troba una coincidencia tornara false.
 
-		return false;
 	}
 
 }

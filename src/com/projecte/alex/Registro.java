@@ -60,8 +60,9 @@ public class Registro {
 		} while (!contraseña.equals(compContraseña));
 
 		int id = leerId();
-		escribirInformacion(id, nombre, nomApell, poblacion, contraseña, correo);
 		String nombreUser = sacarNombreUser(id, correo);
+		escribirInformacion(id,nombreUser, nombre, nomApell, poblacion, contraseña, correo);
+		
 		crearCarpetaInicial(nombreUser);
 		crearCarpetaSecundaria(nombreUser);
 		crearArchivos(nombreUser);
@@ -121,7 +122,7 @@ public class Registro {
 		int int_id = 0;
 		try {
 			Scanner leer = new Scanner(id);
-			String lineaUser = "";
+			String lineaUser = null;
 
 			if (!leer.hasNextLine()) {
 				return 1;
@@ -160,13 +161,13 @@ public class Registro {
 		System.out.println("Hola Bienvendido: " + nom);
 	}
 
-	public void escribirInformacion(int id, String nombreUser, String nomApell, String poblacion, String contraseña,
+	public void escribirInformacion(int id,String nomUser, String nombreUser, String nomApell, String poblacion, String contraseña,
 			String correo) {
 		File escInfo = new File("UsersInfo/UsersInfo.txt");
 		try {
 			FileWriter escribir = new FileWriter(escInfo, true);
-			escribir.write(id + "::" + nombreUser + "::" + nomApell + "::" + correo + "::" + poblacion + "::"
-					+ contraseña + "\n");
+			escribir.write(+id+"::"+nomUser+"::"+ nombreUser + "::" + nomApell + "::" + correo + "::" + poblacion + "::"
+					+ contraseña +"::"+ "\n");
 			escribir.close();
 
 		} catch (Exception e) {

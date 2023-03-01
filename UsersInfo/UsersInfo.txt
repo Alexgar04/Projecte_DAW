@@ -1,5 +1,2 @@
-3::hector::hector::hector@gmail.es::canals::hector123
-3::hectoret::hector::hector@gmail.es::canals::hector1234
-1::qwe::qweewe::qweweq@gmail.qwq::perugia::papapapa
-2::ert::erttery::alexgey@geys.gey::Geylandia::Gey4ever
-
+1::1_alex::Alex::Garcia::alex@alex.es::Ontinyent::12345::
+2::2_hector::Hector::Jai jai::hector@hector.es::Ontinyent::123456::
