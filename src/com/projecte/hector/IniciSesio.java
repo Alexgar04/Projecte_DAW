@@ -1,14 +1,10 @@
 package com.projecte.hector;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
-
+import com.projecte.eric.Menu2;
 import com.projecte.alex.Comprobacion;
-import com.projecte.alex.Menu;
 
 public class IniciSesio {
 
@@ -50,6 +46,9 @@ public class IniciSesio {
 					if(contrasena_b.equals(contrasena)) {
 						System.out.println("Usuario correcto");
 						hola = true;
+						System.out.println("----------------------------");
+						Menu2 menu = new Menu2();
+				        menu.mostrarMenu2();
 						
 					}
 					else {
