@@ -39,25 +39,29 @@ public class IniciSesio {
 			boolean hola = false;
 			while(!hola) {
 				
-				
+				if(!leer.hasNextLine()) {
+					System.out.println("INCORRECTO");
+					pepe = "hola";
+					hola = true;
+				}
+				else {
 					String linea = leer.nextLine();
 					String[] arrayLinea = linea.split("::");
 					String contrasena_b = arrayLinea[6];
-					if(contrasena_b.equals(contrasena)) {
+					String usuario_b = arrayLinea[1];
+					if(contrasena_b.equals(contrasena) && usuario_b.equals(usuario)) {
 						System.out.println("Usuario correcto");
-						hola = true;
 						System.out.println("----------------------------");
 						Menu2 menu = new Menu2();
 				        menu.mostrarMenu2();
 						
 					}
-					else {
-						System.out.println("Contraseña incorrectaa");
-						pepe = "hola";
-						hola = true;
+					
+					
 						
 					
 				}
+				
 			}
 			
 			if(pepe.equals("hola")) {

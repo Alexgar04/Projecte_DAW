@@ -1,9 +1,5 @@
 0::admin::admin::admin::admin@admin.es::admin::admin
 1::1_alex::Alex::Garcia::alex@alex.es::Ontinyent::12345::
 2::2_hector::Hector::Jai jai::hector@hector.es::Ontinyent::123456::
-<<<<<<< Updated upstream
 3::3_erpepe::sergi::Blasco::erpepe@gmail.com::albaida::12345::
 4::4_jjosep::ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp::pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp::jjosep@g.mail.com::Vallada::""lol"""$::
-=======
-3::3_pepe::Jose::Calatayud::pepe@gmail.com::Canals::12345::
->>>>>>> Stashed changes
