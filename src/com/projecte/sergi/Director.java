@@ -1,6 +1,5 @@
 package com.projecte.sergi;
 
-public class ClaseDirector {
 	public class Director {
 		// Atributos de la clase Director
 		private String nombre;
@@ -49,4 +48,4 @@ public class ClaseDirector {
 			this.genero = genero;
 		}
 	}
-}
+

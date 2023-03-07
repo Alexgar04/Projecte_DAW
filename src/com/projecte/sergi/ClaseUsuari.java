@@ -5,9 +5,9 @@ import java.util.List;
 
 public class ClaseUsuari {
 	// atributs
-	 private List<ClaseActor> actor = new ArrayList<>();
+	 private List<Actor> actor = new ArrayList<>();
      private List<Pelicula> peliculas = new ArrayList<>();
-     private List<ClaseDirector> director = new ArrayList<>();
+     private List<Director> director = new ArrayList<>();
      
 	private String nom;
 	private String cognoms;

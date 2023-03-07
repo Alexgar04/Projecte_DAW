@@ -1,6 +1,5 @@
 package com.projecte.sergi;
 
-public class ClaseActor {
 	public class Actor {
 		// Atributos de la clase Actor
 		private String nombre;
@@ -48,5 +47,5 @@ public class ClaseActor {
 		public void setGenero(String genero) {
 			this.genero = genero;
 		}
-	}
+	
 }
