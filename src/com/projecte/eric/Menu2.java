@@ -2,6 +2,8 @@ package com.projecte.eric;
 
 import java.util.Scanner;
 
+import com.projecte.miquel.AñadirPelicula;
+
 public class Menu2 {
 
 	public int mostrarMenu2() {
@@ -25,9 +27,9 @@ public class Menu2 {
 				switch (opcio) {
 				case 1:
 					System.out.println("----------------------------");
-					System.out.println("Menu de pel·lícules ->");
+					System.out.println("Menu de directors ->");
 					semafor = true;
-					mostrarpelicules();
+					mostrardirectors();
 					break;
 				case 2:
 					System.out.println("----------------------------");
@@ -37,9 +39,9 @@ public class Menu2 {
 					break;
 				case 3:
 					System.out.println("----------------------------");
-					System.out.println("Menu de directors ->");
+					System.out.println("Menu de pel·lícules ->");
 					semafor = true;
-					mostrardirectors();
+					mostrarpelicules();
 					break;
 				case 4:
 					
@@ -149,6 +151,7 @@ public class Menu2 {
 				case 1:
 
 					System.out.println("llista general ->");
+					AñadirPelicula.mostrarPeliculesGenerals(AñadirPelicula.getLlistaPelicules());
 					semafor = true;
 					break;
 				case 2:
@@ -159,6 +162,7 @@ public class Menu2 {
 				case 3:
 
 					System.out.println("Afegir pelicules a la llista general->");
+					AñadirPelicula.añadirPeliculaGeneral();
 					semafor = true;
 					break;
 				case 4:

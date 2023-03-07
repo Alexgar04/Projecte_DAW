@@ -1,7 +1,9 @@
 package com.projecte.sergi;
 
+import java.io.Serializable;
+
 public class ClasePelicula {
-	public class Pelicula {
+	public class Pelicula implements Serializable{
 	    // Atributos de la clase Pelicula
 	    private String titulo;
 	    private int año;
@@ -48,5 +50,9 @@ public class ClasePelicula {
 	   public void setGenero(String genero) {
 	       this.genero = genero;
 	   }
+	   
+	   public String toString() {
+			return "[Titul: "+this.titulo+" / Año: "+this.año+" / Pais: "+this.pais+ " / Genere: "+this.genero + " ]";
+		}
 	}
 }
