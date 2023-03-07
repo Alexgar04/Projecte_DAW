@@ -49,7 +49,7 @@ public class AnadirPeliculaGeneral{
 		try {
 			//obrim el fitxer per escriure, sense afegir
 			//només tindrem un ArrayList d'objectes
-			fout = new FileOutputStream("Dades/PeliculesGenerals.llista", false);
+			fout = new FileOutputStream("Dades/PeliculesGenerals.llista", true);
 			oos = new ObjectOutputStream(fout);
 			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
 			oos.writeObject(pelicules);
@@ -100,7 +100,7 @@ public class AnadirPeliculaGeneral{
 	
 	
 	public static int saberId() throws IOException {
-		File f = new File("contador.txt");
+		File f = new File("contadoresId/contadorIdPelis.txt");
 	    int id;
 	    
 	    // Abrir archivo para lectura

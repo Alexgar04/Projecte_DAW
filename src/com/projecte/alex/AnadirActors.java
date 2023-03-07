@@ -1,7 +1,11 @@
 package com.projecte.alex;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -24,7 +28,7 @@ public class AnadirActors {
 		this.actors = actors;
 	}
 
-	public static void pedirInfo() {
+	public static void pedirInfo() throws IOException {
 		Scanner entrada = new Scanner(System.in);
 		String nombre;
 		String nacionalidad;
@@ -36,11 +40,14 @@ public class AnadirActors {
 		nacionalidad = entrada.nextLine();
 		System.out.println("Genere: ");
 		genero = entrada.nextLine();
-		Actor p1 = new Actor("Clint Eastwood", "Estados Unidos", "Masculino");
-		Actor p2 = new Actor("Kirk Douglas", "Estados Unidos", "Masculino");
-		actors.add(p1);
-		actors.add(p2);
-		Actor p = new Actor(nombre, nacionalidad, genero);
+		
+		int id = saberId();
+		
+//		Actor p1 = new Actor("Clint Eastwood", "Estados Unidos", "Masculino");
+//		Actor p2 = new Actor("Kirk Douglas", "Estados Unidos", "Masculino");
+//		actors.add(p1);
+//		actors.add(p2);
+		Actor p = new Actor(nombre, nacionalidad, genero, id);
 		actors.add(p);
 		
 		ObjectOutputStream oos = null;
@@ -48,7 +55,7 @@ public class AnadirActors {
 		try {
 			//obrim el fitxer per escriure, sense afegir
 			//només tindrem un ArrayList d'objectes
-			fout = new FileOutputStream("Dades/ActorssGenerals.llista", false);
+			fout = new FileOutputStream("Dades/ActorssGenerals.llista", true);
 			oos = new ObjectOutputStream(fout);
 			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
 			oos.writeObject(actors);
@@ -95,5 +102,33 @@ public class AnadirActors {
 		} catch (Exception ex) {
 			System.err.println("Error en llegir usuaris.dades " + ex);
 		}
+	}
+	
+	public static int saberId() throws IOException {
+		File f = new File("contadoresId/contadorIdActors.txt");
+	    int id;
+	    
+	    // Abrir archivo para lectura
+	    try (Scanner leer = new Scanner(f)) {
+	        if (f.length() == 0) {
+	            // Si el archivo está vacío, escribir "0" y devolver 0
+	            try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	                bw.write("0");
+	            }
+	            return 0;
+	        } else {
+	            // Leer valor actual de id
+	            id = leer.nextInt();
+	            // Incrementar id
+	            id++;
+	        }
+	    }
+	    
+	    // Escribir nuevo valor de id en el archivo
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	        bw.write(String.valueOf(id));
+	    }
+	    
+	    return id;
 	}
 }

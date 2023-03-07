@@ -7,12 +7,13 @@ public class Actor implements Serializable {
 		private String nombre;
 		private String nacionalidad;
 		private String genero;
-
+		private int id;
 		// Constructor de la clase Actor
-		public Actor(String nombre, String nacionalidad, String genero) {
+		public Actor(String nombre, String nacionalidad, String genero, int id) {
 			this.nombre = nombre;
 			this.nacionalidad = nacionalidad;
 			this.genero = genero;
+			this.id = id;
 		}
 
 		// Métodos getter y setter para cada atributo
@@ -43,7 +44,7 @@ public class Actor implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Nombre: " + nombre + ", Nacionalidad: " + nacionalidad + ", Genero: " + genero;
+			return "Id: "+ id + " Nombre: " + nombre + ", Nacionalidad: " + nacionalidad + ", Genero: " + genero;
 		}
 		
 		

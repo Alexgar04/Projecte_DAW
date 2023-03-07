@@ -1,7 +1,11 @@
 package com.projecte.alex;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -23,24 +27,23 @@ public class AnadirDirectors {
 		AnadirDirectors.directors = directors;
 	}
 	
-	public static void pedirInfo() {
+	public static void pedirInfo() throws IOException {
 		Scanner entrada = new Scanner(System.in);
 		String nombre;
 		String nacionalidad;
 		String genero;
 		
-		System.out.println("Nombre Director: ");
-		nombre = entrada.nextLine();
-		System.out.println("Nacionalidad: ");
-		nacionalidad = entrada.nextLine();
-		System.out.println("Genere: ");
-		genero = entrada.nextLine();
-		Director p1 = new Director("Jose Coronado", "Portugues", "Masculino");
-		Director p2 = new Director("Alice Guy", "Britanica", "Femenino");
-		Director p = new Director(nombre, nacionalidad, genero);
+		System.out.println("Nombre Director: "); 
+		nombre = entrada.nextLine(); 
+		System.out.println("Nacionalidad: "); 
+		nacionalidad = entrada.nextLine(); 
+		System.out.println("Genere: "); 
+		genero = entrada.nextLine(); 
+		int id = saberId();
 		
-		directors.add(p2);
-		directors.add(p1);
+		Director p = new Director(nombre, nacionalidad, genero, id);
+		
+		
 		directors.add(p);
 		
 		ObjectOutputStream oos = null;
@@ -48,7 +51,7 @@ public class AnadirDirectors {
 		try {
 			//obrim el fitxer per escriure, sense afegir
 			//només tindrem un ArrayList d'objectes
-			fout = new FileOutputStream("Dades/DirectorsGenerals.llista", false);
+			fout = new FileOutputStream("Dades/DirectorsGenerals.llista", true);
 			oos = new ObjectOutputStream(fout);
 			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
 			oos.writeObject(directors);
@@ -95,5 +98,33 @@ public class AnadirDirectors {
 		} catch (Exception ex) {
 			System.err.println("Error en llegir usuaris.dades " + ex);
 		}
+	}
+	
+	public static int saberId() throws IOException {
+		File f = new File("contadoresId/contadorIdDirectors.txt");
+	    int id;
+	    
+	    // Abrir archivo para lectura
+	    try (Scanner leer = new Scanner(f)) {
+	        if (f.length() == 0) {
+	            // Si el archivo está vacío, escribir "0" y devolver 0
+	            try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	                bw.write("0");
+	            }
+	            return 0;
+	        } else {
+	            // Leer valor actual de id
+	            id = leer.nextInt();
+	            // Incrementar id
+	            id++;
+	        }
+	    }
+	    
+	    // Escribir nuevo valor de id en el archivo
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	        bw.write(String.valueOf(id));
+	    }
+	    
+	    return id;
 	}
 }
