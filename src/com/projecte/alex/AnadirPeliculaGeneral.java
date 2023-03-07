@@ -62,7 +62,7 @@ public class AnadirPeliculaGeneral{
 		}
 		
 		Menu2 m = new Menu2();
-		m.mostrarMenu2();
+		m.mostrarpelicules();
 		
 	}
 	
@@ -86,7 +86,7 @@ public class AnadirPeliculaGeneral{
 			reader.close();
 			file.close();
 			Menu2 m = new Menu2();
-			m.mostrarMenu2();
+			m.mostrarpelicules();
 		} catch (Exception ex) {
 			System.err.println("Error en llegir usuaris.dades " + ex);
 		}

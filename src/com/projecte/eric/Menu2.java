@@ -2,6 +2,8 @@ package com.projecte.eric;
 
 import java.util.Scanner;
 
+import com.projecte.alex.AnadirActors;
+import com.projecte.alex.AnadirDirectors;
 import com.projecte.alex.AnadirPeliculaGeneral;
 
 
@@ -87,6 +89,7 @@ public class Menu2 {
 				case 1:
 
 					System.out.println("llista general ->");
+					AnadirDirectors.mostrarDirectors();
 					semafor = true;
 					break;
 				case 2:
@@ -97,6 +100,7 @@ public class Menu2 {
 				case 3:
 
 					System.out.println("Afegir director a la llista general->");
+					AnadirDirectors.pedirInfo();
 					semafor = true;
 					break;
 				case 4:
@@ -220,6 +224,7 @@ public class Menu2 {
 				case 1:
 
 					System.out.println("llista general ->");
+					AnadirActors.mostrarActors();
 					semafor = true;
 					break;
 				case 2:
@@ -230,6 +235,7 @@ public class Menu2 {
 				case 3:
 
 					System.out.println("Afegir actors a la llista general->");
+					AnadirActors.pedirInfo();
 					semafor = true;
 					break;
 				case 4:
