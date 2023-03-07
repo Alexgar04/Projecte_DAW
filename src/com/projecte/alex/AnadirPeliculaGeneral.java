@@ -30,12 +30,14 @@ public class AnadirPeliculaGeneral{
 		Scanner entrada = new Scanner(System.in);
 		String pelicula;
 		int any;
+		int id = 0;
+		
 		System.out.println("Dime que pelicula quieres");
 		pelicula = entrada.nextLine();
 		System.out.println("De que año es la peli");
 		any = entrada.nextInt();
 		
-		Pelicula p = new Pelicula(pelicula, any);
+		Pelicula p = new Pelicula(pelicula, any, id);
 		pelicules.add(p);
 		
 		ObjectOutputStream oos = null;
