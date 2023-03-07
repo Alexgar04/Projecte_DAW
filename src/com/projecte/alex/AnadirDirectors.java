@@ -35,8 +35,12 @@ public class AnadirDirectors {
 		nacionalidad = entrada.nextLine();
 		System.out.println("Genere: ");
 		genero = entrada.nextLine();
-		
+		Director p1 = new Director("Jose Coronado", "Portugues", "Masculino");
+		Director p2 = new Director("Alice Guy", "Britanica", "Femenino");
 		Director p = new Director(nombre, nacionalidad, genero);
+		
+		directors.add(p2);
+		directors.add(p1);
 		directors.add(p);
 		
 		ObjectOutputStream oos = null;

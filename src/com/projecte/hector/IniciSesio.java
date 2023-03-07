@@ -51,6 +51,7 @@ public class IniciSesio {
 					String usuario_b = arrayLinea[1];
 					if(contrasena_b.equals(contrasena) && usuario_b.equals(usuario)) {
 						System.out.println("Usuario correcto");
+						nombreUser(usuario);
 						System.out.println("----------------------------");
 						Menu2 menu = new Menu2();
 				        menu.mostrarMenu2();
@@ -82,6 +83,10 @@ public class IniciSesio {
 
 		// Si no troba una coincidencia tornara false.
 
+	}
+	
+	public static String nombreUser(String usuario) {
+		return usuario;
 	}
 
 }

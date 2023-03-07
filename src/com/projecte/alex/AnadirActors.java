@@ -36,7 +36,10 @@ public class AnadirActors {
 		nacionalidad = entrada.nextLine();
 		System.out.println("Genere: ");
 		genero = entrada.nextLine();
-		
+		Actor p1 = new Actor("Clint Eastwood", "Estados Unidos", "Masculino");
+		Actor p2 = new Actor("Kirk Douglas", "Estados Unidos", "Masculino");
+		actors.add(p1);
+		actors.add(p2);
 		Actor p = new Actor(nombre, nacionalidad, genero);
 		actors.add(p);
 		

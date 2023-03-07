@@ -159,6 +159,9 @@ public class Registro {
 
 	public void mensajeBienvenida(String nom) {
 		System.out.println("Hola Bienvendido: " + nom);
+		Comprobacion c = new Comprobacion();
+        c.comprobacion();
+		
 	}
 
 	public void escribirInformacion(int id,String nomUser, String nombreUser, String nomApell, String poblacion, String contraseña,
