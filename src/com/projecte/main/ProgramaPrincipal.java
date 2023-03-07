@@ -20,13 +20,7 @@ public class ProgramaPrincipal {
 //		mostrarhector.mostrarHector();
 		Comprobacion c = new Comprobacion();
         c.comprobacion();
-		
-       
-        
-        
-        
-        
-		
+	
 	}
 
 }

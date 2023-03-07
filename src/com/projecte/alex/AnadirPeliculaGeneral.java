@@ -40,7 +40,20 @@ public class AnadirPeliculaGeneral{
 		any = entrada.nextInt();
 		int id = saberId();
 		
-		
+		// Llegir datos existents en el codi per a que no sobreescribisca els datos
+        try {
+            FileInputStream fileIn = new FileInputStream("Dades/PeliculesGenerals.llista");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            pelicules = (List<Pelicula>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException e) {
+            // Si el archivo no existe todavía, simplemente creamos una nueva lista
+            System.out.println("El archivo no existe todavía");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        
 		Pelicula p = new Pelicula(pelicula, any, id);
 		pelicules.add(p);
 		
@@ -49,7 +62,7 @@ public class AnadirPeliculaGeneral{
 		try {
 			//obrim el fitxer per escriure, sense afegir
 			//només tindrem un ArrayList d'objectes
-			fout = new FileOutputStream("Dades/PeliculesGenerals.llista", true);
+			fout = new FileOutputStream("Dades/PeliculesGenerals.llista", false);
 			oos = new ObjectOutputStream(fout);
 			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
 			oos.writeObject(pelicules);
