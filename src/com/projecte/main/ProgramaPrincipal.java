@@ -1,6 +1,12 @@
 package com.projecte.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.projecte.alex.Comprobacion;
+import com.projecte.sergi.ClaseActor;
+import com.projecte.sergi.ClaseDirector;
+import com.projecte.sergi.Pelicula;
 
 public class ProgramaPrincipal {
 
@@ -15,6 +21,11 @@ public class ProgramaPrincipal {
 		Comprobacion c = new Comprobacion();
         c.comprobacion();
 		
+       
+        
+        
+        
+        
 		
 	}
 

@@ -2,7 +2,8 @@ package com.projecte.eric;
 
 import java.util.Scanner;
 
-import com.projecte.miquel.AñadirPelicula;
+import com.projecte.alex.AnadirPeliculaGeneral;
+
 
 public class Menu2 {
 
@@ -151,18 +152,19 @@ public class Menu2 {
 				case 1:
 
 					System.out.println("llista general ->");
-					AñadirPelicula.mostrarPeliculesGenerals(AñadirPelicula.getLlistaPelicules());
+					AnadirPeliculaGeneral.mostrarPelicules();
 					semafor = true;
 					break;
 				case 2:
 
 					System.out.println("llista personal ->");
+					
 					semafor = true;
 					break;
 				case 3:
 
 					System.out.println("Afegir pelicules a la llista general->");
-					AñadirPelicula.añadirPeliculaGeneral();
+					AnadirPeliculaGeneral.pedirInfo();
 					semafor = true;
 					break;
 				case 4:
