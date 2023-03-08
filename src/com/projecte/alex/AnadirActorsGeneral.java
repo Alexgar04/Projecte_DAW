@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.projecte.eric.Menu2;
 import com.projecte.sergi.Actor;
@@ -19,7 +20,8 @@ import com.projecte.sergi.Pelicula;
 public class AnadirActorsGeneral {
 	
 	private static List <Actor> actors = new ArrayList<>();
-	
+	static Scanner entrada = new Scanner(System.in);
+
 
 	public static List<Actor> getActors() {
 		return actors;
@@ -36,11 +38,11 @@ public class AnadirActorsGeneral {
 		String genero;
 		
 		System.out.println("Nombre Actor: ");
-		nombre = entrada.nextLine();
+		nombre = nombreActor();
 		System.out.println("Nacionalidad: ");
-		nacionalidad = entrada.nextLine();
+		nacionalidad = nacionalitatActor();
 		System.out.println("Genere: ");
-		genero = entrada.nextLine();
+		genero = comprobarGenere();
 		
 		int id = saberId();
 		
@@ -109,6 +111,35 @@ public class AnadirActorsGeneral {
 
 	}
 	
+	public static void ficarActorsDefecte() {
+		File f = new File("Dades/ActorssGenerals.llista");
+		actors.add(new Actor("Pedro", "España", "M", 1));
+		actors.add(new Actor("Maria", "Colombia", "F", 2));
+		actors.add(new Actor("David", "Ecuador", "M", 3));
+		ObjectOutputStream oos = null;
+		FileOutputStream fout = null;
+		try {
+			//obrim el fitxer per escriure, sense afegir
+			//només tindrem un ArrayList d'objectes
+			fout = new FileOutputStream("Dades/ActorssGenerals.llista", false);
+			oos = new ObjectOutputStream(fout);
+			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
+			oos.writeObject(actors);
+			oos.flush();
+			oos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (oos != null) {
+				try {
+					oos.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	public static void mostrarActors() {
 		
 		try {
@@ -130,7 +161,7 @@ public class AnadirActorsGeneral {
 			file.close();
 			Menu2 m = new Menu2();
 		} catch (Exception ex) {
-			System.err.println("Error en llegir usuaris.dades " + ex);
+			System.out.println("No hi han actors encara, fica'n");
 		}
 	}
 	
@@ -160,5 +191,45 @@ public class AnadirActorsGeneral {
 	    }
 	    
 	    return id;
+	}
+	
+	public static String nombreActor() {
+		String nombre;
+		do {
+			nombre = entrada.nextLine();
+			nombre.trim();
+			if(nombre.equals("")) {
+				System.out.println("No pot estar la cadena buida, torna a introduir el nom");
+			}else if(!Pattern.compile("^[a-zA-Z]+$").matcher(nombre).matches()) {
+				System.out.println("El nom sols pot tindre lletres i una sola palabra");
+			}
+		}while(nombre.equals("") || !Pattern.compile("^[a-zA-Z]+$").matcher(nombre).matches());	
+		return nombre;
+	}
+	
+	public static String nacionalitatActor() {
+		String nacionalitat;
+		do {
+			nacionalitat = entrada.nextLine();
+			nacionalitat.trim();
+			if(nacionalitat.equals("")) {
+				System.out.println("No pot estar la cadena buida, torna a introduir el nom");
+			}
+		}while(nacionalitat.equals(""));	
+		return nacionalitat;
+	}
+	
+	public static String comprobarGenere() {
+		String genere;
+		do {
+			genere = entrada.nextLine();
+			genere.trim();
+			if(genere.equals("")) {
+				System.out.println("No pot estar la cadena buida, torna a introduir el nom");
+			}else if(!genere.equalsIgnoreCase("M") && !genere.equalsIgnoreCase("F")) {
+				System.out.println("El genere introduit no exiseix, introdueix M o F");
+			}
+		}while(genere.equals("") || !genere.equalsIgnoreCase("M") && !genere.equalsIgnoreCase("F"));	
+		return genere;
 	}
 }
