@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.projecte.alex.AnadirActors;
 import com.projecte.alex.AnadirDirectors;
 import com.projecte.alex.AnadirPeliculaGeneral;
+import com.projecte.alex.AnadirPeliculaPersonal;
 
 
 public class Menu2 {
@@ -157,23 +158,28 @@ public class Menu2 {
 
 					System.out.println("llista general ->");
 					AnadirPeliculaGeneral.mostrarPelicules();
+					mostrarpelicules();
 					semafor = true;
 					break;
 				case 2:
 
-					System.out.println("llista personal ->");
-					
+					System.out.println("llista personal ->");	
+					AnadirPeliculaPersonal.mostrarPeliculasPersonal();;
+					mostrarpelicules();
 					semafor = true;
 					break;
 				case 3:
 
 					System.out.println("Afegir pelicules a la llista general->");
 					AnadirPeliculaGeneral.pedirInfo();
+					mostrarpelicules();
 					semafor = true;
 					break;
 				case 4:
 
 					System.out.println("Afegir pelicules a la llista personal->");
+					AnadirPeliculaPersonal.añadirPeliculaPersonal();
+					mostrarpelicules();
 					semafor = true;
 					break;
 				case 5:

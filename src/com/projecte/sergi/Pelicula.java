@@ -20,11 +20,17 @@ public class Pelicula implements Serializable {
 		this.id = id;
 	}
 
-	// Métodos getter y setter para cada atributo
-	
-	
+	// Métodos getter y setter para cada atributo	
 	public String getTitulo() {
 		return titulo;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setTitulo(String titulo) {

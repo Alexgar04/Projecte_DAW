@@ -20,7 +20,7 @@ public class AnadirPeliculaGeneral{
 	private static List <Pelicula> pelicules = new ArrayList<>();
 	
 	
-	public List<Pelicula> getPelicules() {
+	public static List<Pelicula> getPelicules() {
 		return pelicules;
 	}
 
@@ -49,7 +49,6 @@ public class AnadirPeliculaGeneral{
             fileIn.close();
         } catch (IOException e) {
             // Si el archivo no existe todavía, simplemente creamos una nueva lista
-            System.out.println("El archivo no existe todavía");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -81,7 +80,6 @@ public class AnadirPeliculaGeneral{
 		}
 		
 		Menu2 m = new Menu2();
-		m.mostrarpelicules();
 		
 	}
 	
@@ -94,7 +92,7 @@ public class AnadirPeliculaGeneral{
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				pelicules = (ArrayList<Pelicula>) reader.readObject();
-				System.out.println("Dades dels usuaris");
+				System.out.println("Pelicules en la llista general");
 				for (Pelicula usuari : pelicules) {
 					  System.out.println(usuari.toString());
 					}
@@ -105,7 +103,6 @@ public class AnadirPeliculaGeneral{
 			reader.close();
 			file.close();
 			Menu2 m = new Menu2();
-			m.mostrarpelicules();
 		} catch (Exception ex) {
 			System.err.println("Error en llegir usuaris.dades " + ex);
 		}
