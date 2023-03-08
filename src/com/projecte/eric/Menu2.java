@@ -1,5 +1,6 @@
 package com.projecte.eric;
 
+import java.io.File;
 import java.util.Scanner;
 
 import com.projecte.alex.AnadirActorsGeneral;
@@ -67,7 +68,10 @@ public class Menu2 {
 	}
 
 	public int mostrardirectors() {
-
+		File f = new File("Dades/DirectorsGenerals.llista");
+		if(f.length() == 0) {
+			AnadirDirectorsGeneral.ficarDirectorsDefecte();
+		}
 		Scanner entrada = new Scanner(System.in);
 		boolean semafor = false;
 		int opcio = 0;
@@ -93,7 +97,6 @@ public class Menu2 {
 					semafor = true;
 					break;
 				case 2:
-
 					System.out.println("llista personal ->");
 					AnadirDirectorsPersonal.mostrarDirectorPersonal();
 					mostrardirectors();
@@ -142,7 +145,10 @@ public class Menu2 {
 	}
 
 	public int mostrarpelicules() {
-
+		File f = new File("Dades/PeliculesGenerals.llista");
+		if(f.length() == 0) {
+			AnadirPeliculaGeneral.ficarPeliculesDefecte();
+		}
 		Scanner entrada = new Scanner(System.in);
 		boolean semafor = false;
 		int opcio = 0;
@@ -218,7 +224,10 @@ public class Menu2 {
 	}
 
 	public int mostraractors() {
-
+		File f = new File("Dades/ActorssGenerals.llista");
+		if(f.length() == 0) {
+			AnadirActorsGeneral.ficarActorsDefecte();
+		}
 		Scanner entrada = new Scanner(System.in);
 		boolean semafor = false;
 		int opcio = 0;
