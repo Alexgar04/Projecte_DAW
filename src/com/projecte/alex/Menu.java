@@ -5,9 +5,13 @@ import java.util.Scanner;
 public class Menu {
 	public int mostrarMenu() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Bienvenido al menu de la Cartelera, elige una opcion: ");
-		System.out.println("1: Inicio de Sesion");
-		System.out.println("2: Registro");
+		System.out.println(" +------------------------------------+ ");
+		System.out.println(" | Bienvenido al menú de la Cartelera |");
+		System.out.println(" |   Elige una opción:                |");
+		System.out.println(" |   1: Inicio de Sesión              |");
+		System.out.println(" |   2: Registro                      |");
+		System.out.println(" +------------------------------------+ ");
+		
 		int num = 0;;
 		do {
 			if(!entrada.hasNextInt()) {

@@ -16,44 +16,38 @@ public class Menu2 {
 	public int mostrarMenu2() {
 
 		Scanner entrada = new Scanner(System.in);
-		String nom = "Paco";
-		String cognoms = "Garcia Gutierrez";
 		int opcio = 0;
-		System.out.println("----------------------------");
-		System.out.println("Menu principal " + "\n");
 		boolean semafor = false;
 		while (!semafor) {
 			
-			System.out.println("1. Accedir menu directors");
-			System.out.println("2. Accedir menu d'actors ");
-			System.out.println("3. Accedir menu pel·lícules");
-			System.out.println("4. Tancar programa");
+			System.out.println(" +----------------------------+ ");
+			System.out.println(" |     Menú principal         |" );
+			System.out.println(" | 1. Acceder menú directores |");
+			System.out.println(" | 2. Acceder menú actores    |");
+			System.out.println(" | 3. Acceder menú películas  |");
+			System.out.println(" | 4. Cerrar programa         |");
+			System.out.println(" +----------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
 				switch (opcio) {
 				case 1:
-					System.out.println("----------------------------");
-					System.out.println("Menu de directors ->");
 					semafor = true;
 					mostrardirectors();
 					break;
 				case 2:
-					System.out.println("----------------------------");
-					System.out.println("Menu d'actors ->");
 					semafor = true;
 					mostraractors();
 					break;
 				case 3:
-					System.out.println("----------------------------");
-					System.out.println("Menu de pel·lícules ->");
+
 					semafor = true;
 					mostrarpelicules();
 					break;
 				case 4:
 					
 					System.out.println("El programa ha sigut tancat");
-					semafor = true;
+					System.exit(0);
 					break;
 
 				default:
@@ -82,13 +76,15 @@ public class Menu2 {
 		boolean semafor = false;
 		int opcio = 0;
 		while (!semafor) {
-			
-			System.out.println("1. Mostrar llista general:");
-			System.out.println("2. Mostrar llista personal: ");
-			System.out.println("3. Afegir director a la llista general:");
-			System.out.println("4. Afegir director a la llista personal:");
-			System.out.println("5. Tancar el programa:");
-			System.out.println("6. Tornar al menu de inici:");
+			System.out.println(" +---------------------------------------+ ");
+			System.out.println(" |       Menú de directores              |");
+			System.out.println(" | 1. Mostrar lista general              |");
+			System.out.println(" | 2. Mostrar lista personal             |");
+			System.out.println(" | 3. Agregar director a lista general   |");
+			System.out.println(" | 4. Agregar director a lista personal  |");
+			System.out.println(" | 5. Cerrar el programa                 |");
+			System.out.println(" | 6. Volver al menú de inicio           |");
+			System.out.println(" +---------------------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
@@ -123,7 +119,7 @@ public class Menu2 {
 				case 5:
 
 					System.out.println("El programa ha sigut tancat");
-					semafor = true;
+					System.exit(0);
 					break;
 				case 6:
 
@@ -157,13 +153,16 @@ public class Menu2 {
 		boolean semafor = false;
 		int opcio = 0;
 		while (!semafor) {
-			
-			System.out.println("1. Mostrar llista general:");
-			System.out.println("2. Mostrar llista personal: ");
-			System.out.println("3. Afegir pelicules a la llista general:");
-			System.out.println("4. Afegir pelicules a la llista personal:");
-			System.out.println("5. Tancar el programa:");
-			System.out.println("6. Tornar al menu de inici:");
+			System.out.println(" +---------------------------------------+ ");
+			System.out.println(" |       Menú de películas               |");
+			System.out.println(" | 1. Mostrar lista general              |");
+			System.out.println(" | 2. Mostrar lista personal             |");
+			System.out.println(" | 3. Agregar película a lista general   |");
+			System.out.println(" | 4. Agregar película a lista personal  |");
+			System.out.println(" | 5. Cerrar el programa                 |");
+			System.out.println(" | 6. Volver al menú de inicio           |");
+			System.out.println(" +---------------------------------------+ ");
+
 
 			try {
 				opcio = entrada.nextInt();
@@ -199,7 +198,7 @@ public class Menu2 {
 				case 5:
 
 					System.out.println("El programa ha sigut tancat");
-					semafor = true;
+					System.exit(0);
 					break;
 				case 6:
 
@@ -234,12 +233,15 @@ public class Menu2 {
 		int opcio = 0;
 		while (!semafor) {
 			
-			System.out.println("1. Mostrar llista general:");
-			System.out.println("2. Mostrar llista personal: ");
-			System.out.println("3. Afegir actors a la llista general:");
-			System.out.println("4. Afegir actors a la llista personal:");
-			System.out.println("5. Tancar el programa:");
-			System.out.println("6. Tornar al menu de inici:");
+			System.out.println(" +------------------------------------+ ");
+			System.out.println(" |       Menú de actores              |");
+			System.out.println(" | 1. Mostrar lista general           |");
+			System.out.println(" | 2. Mostrar lista personal          |");
+			System.out.println(" | 3. Agregar actor a lista general   |");
+			System.out.println(" | 4. Agregar actor a lista personal  |");
+			System.out.println(" | 5. Cerrar el programa              |");
+			System.out.println(" | 6. Volver al menú de inicio        |");
+			System.out.println(" +------------------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
@@ -275,7 +277,7 @@ public class Menu2 {
 				case 5:
 
 					System.out.println("El programa ha sigut tancat");
-					semafor = true;
+					System.exit(0);
 					break;
 				case 6:
 

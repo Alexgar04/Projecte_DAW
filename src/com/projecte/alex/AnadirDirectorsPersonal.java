@@ -103,9 +103,11 @@ public class AnadirDirectorsPersonal {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				directorPersonals = (ArrayList<Director>) reader.readObject();
 				System.out.println("Pelicules en la llista personal");
+				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 				for (Director usuari : directorPersonals) {
 					  System.out.println(usuari.toString());
 					}
+				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 			} catch (Exception ex) {
 				System.err.println("Final del fitxer");
 			}
