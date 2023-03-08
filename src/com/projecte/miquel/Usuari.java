@@ -37,6 +37,6 @@ public class Usuari extends Rol {
 		@Override
 		public String mostrarInformacio() {
 			// TODO Auto-generated method stub
-			return super.mostrarInformacio() + "[Id: " + this.id +"]" + "[Apellidos: " + this.nomApell +"]" + "[Población: " + this.poblacion +"]";
+			return super.mostrarInformacio() + "[Id: " + this.id +"]" + "[Cognoms: " + this.nomApell +"]" + "[Població: " + this.poblacion +"]";
 		}
 }

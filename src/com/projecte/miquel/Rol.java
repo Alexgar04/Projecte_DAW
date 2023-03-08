@@ -49,6 +49,6 @@ public class Rol {
 		
 		public String mostrarInformacio() {
 			return "[Nom: " + this.nom +"]" +
-					"[Contraseña: " + this.contraseña +"]" + "[Correo: " + this.correo +"]";
+					"[Contrasenya: " + this.contraseña +"]" + "[Correu: " + this.correo +"]";
 		}
 }
