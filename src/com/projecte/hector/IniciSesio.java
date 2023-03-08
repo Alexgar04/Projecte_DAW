@@ -9,6 +9,7 @@ import com.projecte.alex.Comprobacion;
 public class IniciSesio {
 
 	public int opcionUser;
+	public static String usuario;
 
 	public int getOpcionUser() {
 		return opcionUser;
@@ -18,11 +19,15 @@ public class IniciSesio {
 		this.opcionUser = opcionUser;
 	}
 
+	public IniciSesio() {
+		this.usuario = getUsuario();
+	}
+	
 	public IniciSesio(int opciopUser) {
 		// El usuari introdueix el nom per teclat i la contrasenya per a comprobarla.
 		Scanner entrada = new Scanner(System.in);
 		System.out.println("Introduzca el nombre de usuario: ");
-		String usuario = entrada.nextLine();
+		this.usuario = entrada.nextLine();
 		System.out.println("Introduzca la contraseña: ");
 		String contrasena = entrada.nextLine();
 		verificarCredenciales(usuario, contrasena);
@@ -51,7 +56,6 @@ public class IniciSesio {
 					String usuario_b = arrayLinea[1];
 					if(contrasena_b.equals(contrasena) && usuario_b.equals(usuario)) {
 						System.out.println("Usuario correcto");
-						nombreUser(usuario);
 						System.out.println("----------------------------");
 						Menu2 menu = new Menu2();
 				        menu.mostrarMenu2();
@@ -84,9 +88,11 @@ public class IniciSesio {
 		// Si no troba una coincidencia tornara false.
 
 	}
-	
-	public static String nombreUser(String usuario) {
+
+	public static String getUsuario() {
 		return usuario;
 	}
+	
+
 
 }
