@@ -2,8 +2,10 @@ package com.projecte.eric;
 
 import java.util.Scanner;
 
-import com.projecte.alex.AnadirActors;
-import com.projecte.alex.AnadirDirectors;
+import com.projecte.alex.AnadirActorsGeneral;
+import com.projecte.alex.AnadirActorsPersonal;
+import com.projecte.alex.AnadirDirectorsGeneral;
+import com.projecte.alex.AnadirDirectorsPersonal;
 import com.projecte.alex.AnadirPeliculaGeneral;
 import com.projecte.alex.AnadirPeliculaPersonal;
 
@@ -90,23 +92,29 @@ public class Menu2 {
 				case 1:
 
 					System.out.println("llista general ->");
-					AnadirDirectors.mostrarDirectors();
+					AnadirDirectorsGeneral.mostrarDirectors();
+					mostrardirectors();
 					semafor = true;
 					break;
 				case 2:
 
 					System.out.println("llista personal ->");
+					AnadirDirectorsPersonal.mostrarDirectorPersonal();
+					mostrardirectors();
 					semafor = true;
 					break;
 				case 3:
 
 					System.out.println("Afegir director a la llista general->");
-					AnadirDirectors.pedirInfo();
+					AnadirDirectorsGeneral.pedirInfo();
+					mostrardirectors();
 					semafor = true;
 					break;
 				case 4:
 
 					System.out.println("Afegir director a la llista personal->");
+					AnadirDirectorsPersonal.añadirDirectorPersonal();
+					mostrardirectors();
 					semafor = true;
 					break;
 				case 5:
@@ -230,23 +238,29 @@ public class Menu2 {
 				case 1:
 
 					System.out.println("llista general ->");
-					AnadirActors.mostrarActors();
+					AnadirActorsGeneral.mostrarActors();
+					mostraractors();
 					semafor = true;
 					break;
 				case 2:
 
 					System.out.println("llista personal ->");
+					AnadirActorsPersonal.mostrarActorsPersonal();
+					mostraractors();
 					semafor = true;
 					break;
 				case 3:
 
 					System.out.println("Afegir actors a la llista general->");
-					AnadirActors.pedirInfo();
+					AnadirActorsGeneral.pedirInfo();
+					mostraractors();
 					semafor = true;
 					break;
 				case 4:
 
 					System.out.println("Afegir actors a la llista personal->");
+					AnadirActorsPersonal.añadirActorPersonal();
+					mostraractors();
 					semafor = true;
 					break;
 				case 5:

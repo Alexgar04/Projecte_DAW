@@ -17,8 +17,18 @@ public class Actor implements Serializable {
 		}
 
 		// Métodos getter y setter para cada atributo
+		
+		
 		public String getNombre() {
 			return nombre;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
 		}
 
 		public void setNombre(String nombre) {

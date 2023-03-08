@@ -14,51 +14,61 @@ import java.util.Scanner;
 
 import com.projecte.eric.Menu2;
 import com.projecte.sergi.Actor;
+import com.projecte.sergi.Director;
+import com.projecte.sergi.Pelicula;
 
-public class AnadirActors {
-	
-	private static List <Actor> actors = new ArrayList<>();
-	
+public class AnadirDirectorsGeneral {
+	private static List <Director> directors = new ArrayList<>();
 
-	public List<Actor> getActors() {
-		return actors;
+	public static List<Director> getDirectors() {
+		return directors;
 	}
 
-	public void setActors(List<Actor> actors) {
-		this.actors = actors;
+	public static void setDirectors(List<Director> directors) {
+		AnadirDirectorsGeneral.directors = directors;
 	}
-
+	
 	public static void pedirInfo() throws IOException {
 		Scanner entrada = new Scanner(System.in);
 		String nombre;
 		String nacionalidad;
 		String genero;
 		
-		System.out.println("Nombre Actor: ");
-		nombre = entrada.nextLine();
-		System.out.println("Nacionalidad: ");
-		nacionalidad = entrada.nextLine();
-		System.out.println("Genere: ");
-		genero = entrada.nextLine();
-		
+		System.out.println("Nombre Director: "); 
+		nombre = entrada.nextLine(); 
+		System.out.println("Nacionalidad: "); 
+		nacionalidad = entrada.nextLine(); 
+		System.out.println("Genere: "); 
+		genero = entrada.nextLine(); 
 		int id = saberId();
 		
-//		Actor p1 = new Actor("Clint Eastwood", "Estados Unidos", "Masculino");
-//		Actor p2 = new Actor("Kirk Douglas", "Estados Unidos", "Masculino");
-//		actors.add(p1);
-//		actors.add(p2);
-		Actor p = new Actor(nombre, nacionalidad, genero, id);
-		actors.add(p);
+		// Llegir datos existents en el codi per a que no sobreescribisca els datos
+        try {
+            FileInputStream fileIn = new FileInputStream("Dades/DirectorsGenerals.llista");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            directors = (List<Director>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException e) {
+            // Si el archivo no existe todavía, simplemente creamos una nueva lista
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+		
+		Director p = new Director(nombre, nacionalidad, genero, id);
+		
+		
+		directors.add(p);
 		
 		ObjectOutputStream oos = null;
 		FileOutputStream fout = null;
 		try {
 			//obrim el fitxer per escriure, sense afegir
 			//només tindrem un ArrayList d'objectes
-			fout = new FileOutputStream("Dades/ActorssGenerals.llista", true);
+			fout = new FileOutputStream("Dades/DirectorsGenerals.llista", false);
 			oos = new ObjectOutputStream(fout);
 			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
-			oos.writeObject(actors);
+			oos.writeObject(directors);
 			oos.flush();
 			oos.close();
 		} catch (Exception ex) {
@@ -74,21 +84,21 @@ public class AnadirActors {
 		}
 		
 		Menu2 m = new Menu2();
-		m.mostraractors();
-
+		m.mostrardirectors();
+		
 	}
 	
-	public static void mostrarActors() {
+	public static void mostrarDirectors() {
 		
 		try {
 			// obrim fitxer per a lectura
-			FileInputStream file = new FileInputStream("Dades/ActorssGenerals.llista");
+			FileInputStream file = new FileInputStream("Dades/DirectorsGenerals.llista");
 			ObjectInputStream reader = new ObjectInputStream(file);
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
-				actors = (ArrayList<Actor>) reader.readObject();
+				directors = (ArrayList<Director>) reader.readObject();
 				System.out.println("Dades dels usuaris");
-				for (Actor usuari : actors) {
+				for (Director usuari : directors) {
 					  System.out.println(usuari.toString());
 					}
 			} catch (Exception ex) {
@@ -98,14 +108,13 @@ public class AnadirActors {
 			reader.close();
 			file.close();
 			Menu2 m = new Menu2();
-			m.mostraractors();
 		} catch (Exception ex) {
 			System.err.println("Error en llegir usuaris.dades " + ex);
 		}
 	}
 	
 	public static int saberId() throws IOException {
-		File f = new File("contadoresId/contadorIdActors.txt");
+		File f = new File("contadoresId/contadorIdDirectors.txt");
 	    int id;
 	    
 	    // Abrir archivo para lectura
