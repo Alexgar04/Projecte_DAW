@@ -113,7 +113,7 @@ public class AnadirDirectorsPersonal {
 			reader.close();
 			file.close();
 		} catch (Exception ex) {
-			System.err.println("Error en llegir usuaris.dades " + ex);
+			System.out.println("No hi han directors en la llista personal encara, fica'n");
 		}
 	}
 }
