@@ -119,9 +119,11 @@ public class AnadirActorsGeneral {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				actors = (ArrayList<Actor>) reader.readObject();
 				System.out.println("Dades dels usuaris");
+				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 				for (Actor usuari : actors) {
 					  System.out.println(usuari.toString());
 					}
+				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 			} catch (Exception ex) {
 				System.err.println("Final del fitxer");
 			}

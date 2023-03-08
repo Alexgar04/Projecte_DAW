@@ -98,9 +98,11 @@ public class AnadirDirectorsGeneral {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				directors = (ArrayList<Director>) reader.readObject();
 				System.out.println("Dades dels usuaris");
+				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 				for (Director usuari : directors) {
 					  System.out.println(usuari.toString());
 					}
+				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 			} catch (Exception ex) {
 				System.err.println("Final del fitxer");
 			}
