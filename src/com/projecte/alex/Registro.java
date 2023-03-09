@@ -25,10 +25,9 @@ public class Registro {
 		String poblacion;
 		String nombre = PedirUser();
 		do {
-			System.out.println("Cognoms: ");
+			System.out.println("Apellidos: ");
 			nomApell = entrada.nextLine();
 			nomApell.replace("  ", "");
-<<<<<<< HEAD
 			while (nomApell.contains("::")) {
 				System.out.println("No se puede poner este caracter \"::\" ");
 				entrada.nextLine();
@@ -36,14 +35,9 @@ public class Registro {
 		} while (nomApell.length() < 5);
 
 		System.out.println("Introduce tu correo electronico ");
-=======
-		}while(nomApell.length() < 5);
-		
-		System.out.println("Introdueix el correu electrònic ");
->>>>>>> main
 		String correo = entrada.nextLine();
 		while (!Pattern.compile("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$").matcher(correo).matches()) {
-			System.out.println("Introdueix un correu vàlid");
+			System.out.println("Introduce un correo valido");
 			correo = entrada.nextLine();
 			while (correo.contains("::")) {
 				System.out.println("No se puede poner este caracter \"::\" ");
@@ -52,7 +46,6 @@ public class Registro {
 			}
 		}
 		do {
-<<<<<<< HEAD
 			System.out.println("Poblacion: ");
 			poblacion = entrada.nextLine();
 			poblacion = poblacion.replace(" ", "");
@@ -61,11 +54,6 @@ public class Registro {
 				entrada.nextLine();
 
 			}
-=======
-		System.out.println("Població: ");
-		poblacion = entrada.nextLine();
-		poblacion = poblacion.replace(" ", "");
->>>>>>> main
 
 		} while (poblacion.length() < 3);
 
@@ -79,9 +67,8 @@ public class Registro {
 		String compContraseña;
 		do {
 			do {
-				System.out.println("Introdueix una contrasenya de almenys 5 caracters: ");
+				System.out.println("Introduce contraseña de al menos 5 caracteres: ");
 				contraseña = entrada.nextLine();
-<<<<<<< HEAD
 				while (contraseña.contains("::")) {
 					System.out.println("No se puede poner este caracter \"::\" ");
 					entrada.nextLine();
@@ -90,15 +77,9 @@ public class Registro {
 			} while (contraseña.length() < 5);
 
 			System.out.println("Vuelve a introducir la contraseña");
-=======
-			}while(contraseña.length() < 5);
-			
-			
-			System.out.println("Torna a introduir la contrasenya");
->>>>>>> main
 			compContraseña = entrada.nextLine();
 			if (!contraseña.equals(compContraseña)) {
-				System.out.println("Error, les contrasenyes introduides no coincideixen");
+				System.out.println("Error las contraseñas introducidas no coinciden");
 			}
 		} while (!contraseña.equals(compContraseña));
 
@@ -143,10 +124,10 @@ public class Registro {
 		File User = new File("Usuarios/" + nombreUser);
 		boolean creacion = User.mkdir();
 		if (creacion) {
-			System.out.println("El usuario " + nombreUser + " s'ha creat correctament");
+			System.out.println("El usuario " + nombreUser + " se ha creado correctamente");
 			mensajeBienvenida(nombreUser);
 		} else {
-			System.out.println("Algo ha fallat intentau de nou mes tart");
+			System.out.println("Algo ha fallado intentelo de nuevo mas tarde");
 		}
 	}
 
@@ -186,7 +167,7 @@ public class Registro {
 	public String PedirUser() {
 		String nombreUser;
 		do {
-			System.out.println("Introdueix el teu nom: ");
+			System.out.println("Introduce tu nombre: ");
 			nombreUser = entrada.nextLine();
 			nombreUser = nombreUser.replace(" ", "").replace("  ", "");
 			while (nombreUser.contains("::")) {
@@ -202,7 +183,7 @@ public class Registro {
 	}
 
 	public void mensajeBienvenida(String nom) {
-		System.out.println("Hola, Benvingut: " + nom);
+		System.out.println("Hola Bienvendido: " + nom);
 		Comprobacion c = new Comprobacion();
 		c.comprobacion();
 
