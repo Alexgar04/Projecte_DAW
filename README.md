@@ -3,7 +3,9 @@
 Funcions del administrador:
 
 Temporalment te sols per a les llistes generals.
+
 id: admin
+
 passwd: admin
 
 Funcions del usuari:
