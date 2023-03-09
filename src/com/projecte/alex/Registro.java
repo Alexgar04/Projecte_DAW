@@ -28,20 +28,40 @@ public class Registro {
 			System.out.println("Apellidos: ");
 			nomApell = entrada.nextLine();
 			nomApell.replace("  ", "");
-		}while(nomApell.length() < 5);
-		
+			while (nomApell.contains("::")) {
+				System.out.println("No se puede poner este caracter \"::\" ");
+				entrada.nextLine();
+			}
+		} while (nomApell.length() < 5);
+
 		System.out.println("Introduce tu correo electronico ");
 		String correo = entrada.nextLine();
 		while (!Pattern.compile("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$").matcher(correo).matches()) {
 			System.out.println("Introduce un correo valido");
 			correo = entrada.nextLine();
+			while (correo.contains("::")) {
+				System.out.println("No se puede poner este caracter \"::\" ");
+				entrada.nextLine();
+
+			}
 		}
 		do {
-		System.out.println("Poblacion: ");
-		poblacion = entrada.nextLine();
-		poblacion = poblacion.replace(" ", "");
+			System.out.println("Poblacion: ");
+			poblacion = entrada.nextLine();
+			poblacion = poblacion.replace(" ", "");
+			while (poblacion.contains("::")) {
+				System.out.println("No se puede poner este caracter \"::\" ");
+				entrada.nextLine();
 
-		}while(poblacion.length() < 3);
+			}
+
+		} while (poblacion.length() < 3);
+
+		String fechaNacimiento;
+		do {
+			System.out.println("Introduce una fecha de nacimiento en formato dd/mm/aaaa");
+			fechaNacimiento = entrada.nextLine();
+		} while (!Pattern.compile("^\\d{2}\\d{2}\\d{4}$").matcher(fechaNacimiento).matches());
 
 		String contraseña;
 		String compContraseña;
@@ -49,9 +69,13 @@ public class Registro {
 			do {
 				System.out.println("Introduce contraseña de al menos 5 caracteres: ");
 				contraseña = entrada.nextLine();
-			}while(contraseña.length() < 5);
-			
-			
+				while (contraseña.contains("::")) {
+					System.out.println("No se puede poner este caracter \"::\" ");
+					entrada.nextLine();
+
+				}
+			} while (contraseña.length() < 5);
+
 			System.out.println("Vuelve a introducir la contraseña");
 			compContraseña = entrada.nextLine();
 			if (!contraseña.equals(compContraseña)) {
@@ -61,45 +85,43 @@ public class Registro {
 
 		int id = leerId();
 		String nombreUser = sacarNombreUser(id, correo);
-		escribirInformacion(id,nombreUser, nombre, nomApell, poblacion, contraseña, correo);
-		
+		escribirInformacion(id, nombreUser, nombre, nomApell, poblacion, contraseña, correo);
+
 		crearCarpetaInicial(nombreUser);
 		crearCarpetaSecundaria(nombreUser);
 		crearArchivos(nombreUser);
-		
-		
-		
+
 	}
-	
+
 	public void crearArchivos(String nomUser) {
-		File fiDir = new File ("Usuarios/"+nomUser+"/dades/Directors.llista.txt");
+		File fiDir = new File("Usuarios/" + nomUser + "/dades/Directors.llista.txt");
 		try {
 			fiDir.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		File fiAct = new File ("Usuarios/"+nomUser+"/dades/Actors.llista.txt");
+		File fiAct = new File("Usuarios/" + nomUser + "/dades/Actors.llista.txt");
 		try {
 			fiAct.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		File fiPel = new File ("Usuarios/"+nomUser+"/dades/Pelicules.llista.txt");
+		File fiPel = new File("Usuarios/" + nomUser + "/dades/Pelicules.llista.txt");
 		try {
 			fiPel.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void crearCarpetaSecundaria(String nomUser) {
-		File dades = new File("Usuarios/"+nomUser+"/dades");
+		File dades = new File("Usuarios/" + nomUser + "/dades");
 		dades.mkdir();
 	}
-	
+
 	public void crearCarpetaInicial(String nombreUser) {
-		File User = new File("Usuarios/"+nombreUser);
+		File User = new File("Usuarios/" + nombreUser);
 		boolean creacion = User.mkdir();
 		if (creacion) {
 			System.out.println("El usuario " + nombreUser + " se ha creado correctamente");
@@ -109,11 +131,9 @@ public class Registro {
 		}
 	}
 
-	
-
 	public String sacarNombreUser(int id, String correo) {
 		int letra = correo.indexOf("@");
-		String nomUser = id +"_"+ correo.substring(0, letra);
+		String nomUser = id + "_" + correo.substring(0, letra);
 		return nomUser;
 	}
 
@@ -150,9 +170,14 @@ public class Registro {
 			System.out.println("Introduce tu nombre: ");
 			nombreUser = entrada.nextLine();
 			nombreUser = nombreUser.replace(" ", "").replace("  ", "");
-		}while(nombreUser.length() < 2);
-		
-		
+			while (nombreUser.contains("::")) {
+				System.out.println("No se puede poner este caracter \"::\" ");
+				nombreUser = entrada.nextLine();
+				nombreUser = nombreUser.replace(" ", "").replace("  ", "");
+			}
+
+		} while (nombreUser.length() < 2);
+
 		return nombreUser;
 
 	}
@@ -160,17 +185,17 @@ public class Registro {
 	public void mensajeBienvenida(String nom) {
 		System.out.println("Hola Bienvendido: " + nom);
 		Comprobacion c = new Comprobacion();
-        c.comprobacion();
-		
+		c.comprobacion();
+
 	}
 
-	public void escribirInformacion(int id,String nomUser, String nombreUser, String nomApell, String poblacion, String contraseña,
-			String correo) {
+	public void escribirInformacion(int id, String nomUser, String nombreUser, String nomApell, String poblacion,
+			String contraseña, String correo) {
 		File escInfo = new File("UsersInfo/UsersInfo.txt");
 		try {
 			FileWriter escribir = new FileWriter(escInfo, true);
-			escribir.write(+id+"::"+nomUser+"::"+ nombreUser + "::" + nomApell + "::" + correo + "::" + poblacion + "::"
-					+ contraseña +"::"+ "\n");
+			escribir.write(+id + "::" + nomUser + "::" + nombreUser + "::" + nomApell + "::" + correo + "::" + poblacion
+					+ "::" + contraseña + "::" + "\n");
 			escribir.close();
 
 		} catch (Exception e) {
