@@ -2,7 +2,9 @@
 
 Funcions del administrador:
 
-Temporalment te les mateixes funcions que el usuari normal.
+Temporalment te sols per a les llistes generals.
+id: admin
+passwd: admin
 
 Funcions del usuari:
 
