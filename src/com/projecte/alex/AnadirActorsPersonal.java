@@ -20,7 +20,7 @@ public class AnadirActorsPersonal {
 
 	public static void añadirActorPersonal() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Que actors vols anyadir a la teua llista");
+		System.out.println("Que actor vols anyadir a la teua llista");
 		AnadirActorsGeneral.mostrarActors();
 		int n = 0;
 		int num_max = idPeli();

@@ -35,9 +35,9 @@ public class AnadirPeliculaGeneral{
 		Scanner entrada = new Scanner(System.in);
 		String pelicula;
 		int any;
-		System.out.println("Dime que pelicula quieres");
+		System.out.println("Dime que película vols");
 		pelicula = nomPelicula();
-		System.out.println("De que año es la peli");
+		System.out.println("De quin any es la pelicula");
 		any = anyPelicula();
 		int id = saberId();
 		
@@ -122,7 +122,7 @@ public class AnadirPeliculaGeneral{
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				pelicules = (ArrayList<Pelicula>) reader.readObject();
-				System.out.println("Pelicules en la llista general");
+				System.out.println("Películes en la llista general");
 				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 				for (Pelicula usuari : pelicules) {
 					  System.out.println(usuari.toString());
@@ -185,12 +185,12 @@ public class AnadirPeliculaGeneral{
 		int n;
 		do {
 			while (!entrada.hasNextInt()) {
-				System.out.println("El valor introducido no és un número");
+				System.out.println("El valor introduit no és un número");
 				entrada.next();
 			}
 			n = entrada.nextInt();
 			if (n < 1940 || n > 2023) {
-				System.out.println("El valor introducido está fuera del rango");
+				System.out.println("El valor introduit está fora del rang");
 			}
 		} while (n < 1940 || n > 2023);
 		

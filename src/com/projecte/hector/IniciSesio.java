@@ -26,9 +26,9 @@ public class IniciSesio {
 	public IniciSesio(int opciopUser) {
 		// El usuari introdueix el nom per teclat i la contrasenya per a comprobarla.
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Introduzca el nombre de usuario: ");
+		System.out.println("Introdueix el nom d'usuario: ");
 		this.usuario = entrada.nextLine();
-		System.out.println("Introduzca la contraseña: ");
+		System.out.println("Introdueix la contrasenya: ");
 		String contrasena = entrada.nextLine();
 		verificarCredenciales(usuario, contrasena);
 
@@ -45,7 +45,7 @@ public class IniciSesio {
 			while(!hola) {
 				
 				if(!leer.hasNextLine()) {
-					System.out.println("INCORRECTO");
+					System.out.println("INCORRECTE");
 					pepe = "hola";
 					hola = true;
 				}
@@ -55,7 +55,7 @@ public class IniciSesio {
 					String contrasena_b = arrayLinea[6];
 					String usuario_b = arrayLinea[1];
 					if(contrasena_b.equals(contrasena) && usuario_b.equals(usuario)) {
-						System.out.println("Usuario correcto");
+						System.out.println("Usuari correcte");
 						System.out.println("----------------------------");
 						Menu2 menu = new Menu2();
 				        menu.mostrarMenu2();
@@ -79,7 +79,7 @@ public class IniciSesio {
 		}
 	       
 	    } else {
-	        System.out.println("El usuario introducido no existe");
+	        System.out.println("El usuari introduit no existeix");
 	        Comprobacion c = new Comprobacion();
             c.comprobacion();
 		}

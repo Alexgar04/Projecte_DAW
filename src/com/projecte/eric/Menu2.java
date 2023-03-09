@@ -22,10 +22,10 @@ public class Menu2 {
 			
 			System.out.println(" +----------------------------+ ");
 			System.out.println(" |     Menú principal         |" );
-			System.out.println(" | 1. Acceder menú directores |");
-			System.out.println(" | 2. Acceder menú actores    |");
-			System.out.println(" | 3. Acceder menú películas  |");
-			System.out.println(" | 4. Cerrar programa         |");
+			System.out.println(" | 1. Accedir menú directors  |");
+			System.out.println(" | 2. Accedir menú actors     |");
+			System.out.println(" | 3. Accedir menú películes  |");
+			System.out.println(" | 4. Tancar programa         |");
 			System.out.println(" +----------------------------+ ");
 
 			try {
@@ -76,15 +76,15 @@ public class Menu2 {
 		boolean semafor = false;
 		int opcio = 0;
 		while (!semafor) {
-			System.out.println(" +---------------------------------------+ ");
-			System.out.println(" |       Menú de directores              |");
-			System.out.println(" | 1. Mostrar lista general              |");
-			System.out.println(" | 2. Mostrar lista personal             |");
-			System.out.println(" | 3. Agregar director a lista general   |");
-			System.out.println(" | 4. Agregar director a lista personal  |");
-			System.out.println(" | 5. Cerrar el programa                 |");
-			System.out.println(" | 6. Volver al menú de inicio           |");
-			System.out.println(" +---------------------------------------+ ");
+			System.out.println(" +----------------------------------------+ ");
+			System.out.println(" |       Menú de directores               |");
+			System.out.println(" | 1. Mostrar llista general              |");
+			System.out.println(" | 2. Mostrar llista personal             |");
+			System.out.println(" | 3. Afegir director a llista general    |");
+			System.out.println(" | 4. Afegir director a llista personal   |");
+			System.out.println(" | 5. Tancar el programa                  |");
+			System.out.println(" | 6. Tornar al menú de inici             |");
+			System.out.println(" +----------------------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
@@ -153,15 +153,15 @@ public class Menu2 {
 		boolean semafor = false;
 		int opcio = 0;
 		while (!semafor) {
-			System.out.println(" +---------------------------------------+ ");
-			System.out.println(" |       Menú de películas               |");
-			System.out.println(" | 1. Mostrar lista general              |");
-			System.out.println(" | 2. Mostrar lista personal             |");
-			System.out.println(" | 3. Agregar película a lista general   |");
-			System.out.println(" | 4. Agregar película a lista personal  |");
-			System.out.println(" | 5. Cerrar el programa                 |");
-			System.out.println(" | 6. Volver al menú de inicio           |");
-			System.out.println(" +---------------------------------------+ ");
+			System.out.println(" +----------------------------------------+ ");
+			System.out.println(" |       Menú de películes                |");
+			System.out.println(" | 1. Mostrar llista general              |");
+			System.out.println(" | 2. Mostrar llista personal             |");
+			System.out.println(" | 3. Afegir película a llista general    |");
+			System.out.println(" | 4. Afegir película a llista personal   |");
+			System.out.println(" | 5. Tancar el programa                  |");
+			System.out.println(" | 6. Tornar al menú de inicio            |");
+			System.out.println(" +----------------------------------------+ ");
 
 
 			try {
@@ -233,15 +233,15 @@ public class Menu2 {
 		int opcio = 0;
 		while (!semafor) {
 			
-			System.out.println(" +------------------------------------+ ");
-			System.out.println(" |       Menú de actores              |");
-			System.out.println(" | 1. Mostrar lista general           |");
-			System.out.println(" | 2. Mostrar lista personal          |");
-			System.out.println(" | 3. Agregar actor a lista general   |");
-			System.out.println(" | 4. Agregar actor a lista personal  |");
-			System.out.println(" | 5. Cerrar el programa              |");
-			System.out.println(" | 6. Volver al menú de inicio        |");
-			System.out.println(" +------------------------------------+ ");
+			System.out.println(" +-------------------------------------+ ");
+			System.out.println(" |       Menú de actors                |");
+			System.out.println(" | 1. Mostrar llista general           |");
+			System.out.println(" | 2. Mostrar llista personal          |");
+			System.out.println(" | 3. Afegir actor a llista general    |");
+			System.out.println(" | 4. Afegir actor a llista personal   |");
+			System.out.println(" | 5. Tancar el programa               |");
+			System.out.println(" | 6. Tornar al menú de inicio         |");
+			System.out.println(" +-------------------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
@@ -287,7 +287,6 @@ public class Menu2 {
 					break;
 
 				default:
-					System.out.println("----------------------------");
 					System.out.println("Opció no vàlida. Torna a provar.");
 
 				}

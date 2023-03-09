@@ -39,9 +39,9 @@ public class AnadirActorsGeneral {
 		
 		System.out.println("Nombre Actor: ");
 		nombre = nombreActor();
-		System.out.println("Nacionalidad: ");
+		System.out.println("Nacionalitat: ");
 		nacionalidad = nacionalitatActor();
-		System.out.println("Genere: ");
+		System.out.println("Gènere: ");
 		genero = comprobarGenere();
 		
 		int id = saberId();
