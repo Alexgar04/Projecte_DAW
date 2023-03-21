@@ -43,7 +43,7 @@ public class AnadirPeliculaPersonal {
 			if(n == pelicula.getId()) {
 				// Llegir datos existents en el codi per a que no sobreescribisca els datos
 		        try {
-		            FileInputStream fileIn = new FileInputStream("Usuarios/"+nomUsuari+"/dades/Pelicules.llista.txt");
+		            FileInputStream fileIn = new FileInputStream("Usuarios/"+nomUsuari+"/dades/Pelicules.llista");
 		            ObjectInputStream in = new ObjectInputStream(fileIn);
 		            peliculesPersonals = (List<Pelicula>) in.readObject();
 		            in.close();
@@ -61,7 +61,7 @@ public class AnadirPeliculaPersonal {
 				try {
 					//obrim el fitxer per escriure, sense afegir
 					//només tindrem un ArrayList d'objectes
-					fout = new FileOutputStream("Usuarios/"+nomUsuari+"/dades/Pelicules.llista.txt", false);
+					fout = new FileOutputStream("Usuarios/"+nomUsuari+"/dades/Pelicules.llista", false);
 					oos = new ObjectOutputStream(fout);
 					//escrivim ArrayList sencer en el fitxer (1 sol objecte)
 					oos.writeObject(peliculesPersonals);
@@ -101,7 +101,7 @@ public class AnadirPeliculaPersonal {
 
 		try {
 			// obrim fitxer per a lectura
-			FileInputStream file = new FileInputStream("Usuarios/"+nomUsuari+"/dades/Pelicules.llista.txt");
+			FileInputStream file = new FileInputStream("Usuarios/"+nomUsuari+"/dades/Pelicules.llista");
 			ObjectInputStream reader = new ObjectInputStream(file);
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)

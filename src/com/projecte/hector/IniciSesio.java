@@ -55,10 +55,16 @@ public class IniciSesio {
 					String contrasena_b = arrayLinea[6];
 					String usuario_b = arrayLinea[1];
 					if(contrasena_b.equals(contrasena) && usuario_b.equals(usuario)) {
-						System.out.println("Usuari correcte");
-						System.out.println("----------------------------");
-						Menu2 menu = new Menu2();
-				        menu.mostrarMenu2();
+						if (usuario_b.equals("admin")) {
+							System.out.println("eres el admin");
+							Menu2 m = new Menu2();
+							m.mostrarMenu2Admin();
+						}else {
+							System.out.println("Usuari correcte");
+							System.out.println("----------------------------");
+							Menu2 menu = new Menu2();
+					        menu.mostrarMenu2();
+						}
 						
 					}
 					
@@ -96,3 +102,4 @@ public class IniciSesio {
 
 
 }
+

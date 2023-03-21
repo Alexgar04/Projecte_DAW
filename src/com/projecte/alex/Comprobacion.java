@@ -10,8 +10,10 @@ public class Comprobacion {
         
         if (opcionUser == 1) {
             IniciSesio iniciSesio = new IniciSesio(opcionUser);
-        } else {
+        } else if(opcionUser == 2){
             Registro reg = new Registro(opcionUser);
+        }else {
+        	System.exit(0);
         }
 	}
 }

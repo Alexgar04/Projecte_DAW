@@ -50,7 +50,7 @@ public class AnadirActorsGeneral {
 		
 		// Llegir datos existents en el codi per a que no sobreescribisca els datos
         try {
-            FileInputStream fileIn = new FileInputStream("Dades/ActorssGenerals.llista");
+            FileInputStream fileIn = new FileInputStream("Dades/ActorsGenerals.dades");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             actors = (List<Actor>) in.readObject();
             in.close();
@@ -68,7 +68,7 @@ public class AnadirActorsGeneral {
         
      // Llegir datos existents en el codi per a que no sobreescribisca els datos
         try {
-            FileInputStream fileIn = new FileInputStream("Dades/ActorsGenerals.llista");
+            FileInputStream fileIn = new FileInputStream("Dades/ActorsGenerals.dades");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             actors = (List<Actor>) in.readObject();
             in.close();
@@ -88,7 +88,7 @@ public class AnadirActorsGeneral {
 		try {
 			//obrim el fitxer per escriure, sense afegir
 			//només tindrem un ArrayList d'objectes
-			fout = new FileOutputStream("Dades/ActorssGenerals.llista", false);
+			fout = new FileOutputStream("Dades/ActorsGenerals.dades", false);
 			oos = new ObjectOutputStream(fout);
 			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
 			oos.writeObject(actors);
@@ -112,39 +112,38 @@ public class AnadirActorsGeneral {
 	}
 	
 	public static void ficarActorsDefecte() {
-		File f = new File("Dades/ActorssGenerals.llista");
-		actors.add(new Actor("Pedro", "España", "M", 1));
-		actors.add(new Actor("Maria", "Colombia", "F", 2));
-		actors.add(new Actor("David", "Ecuador", "M", 3));
-		ObjectOutputStream oos = null;
-		FileOutputStream fout = null;
-		try {
-			//obrim el fitxer per escriure, sense afegir
-			//només tindrem un ArrayList d'objectes
-			fout = new FileOutputStream("Dades/ActorssGenerals.llista", false);
-			oos = new ObjectOutputStream(fout);
-			//escrivim ArrayList sencer en el fitxer (1 sol objecte)
-			oos.writeObject(actors);
-			oos.flush();
-			oos.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (oos != null) {
-				try {
-					oos.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
+		File f = new File("Dades/ActorsGenerals.dades");
+	    if (!f.exists()) {
+	        actors.add(new Actor("Pedro", "España", "M", 1));
+	        actors.add(new Actor("Maria", "Colombia", "F", 2));
+	        actors.add(new Actor("David", "Ecuador", "M", 3));
+	        ObjectOutputStream oos = null;
+	        FileOutputStream fout = null;
+	        try {
+	            fout = new FileOutputStream("Dades/ActorsGenerals.dades", false);
+	            oos = new ObjectOutputStream(fout);
+	            oos.writeObject(actors);
+	            oos.flush();
+	            oos.close();
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	        } finally {
+	            if (oos != null) {
+	                try {
+	                    oos.close();
+	                } catch (Exception ex) {
+	                    ex.printStackTrace();
+	                }
+	            }
+	        }
+	    }
 	}
 	
 	public static void mostrarActors() {
 		
 		try {
 			// obrim fitxer per a lectura
-			FileInputStream file = new FileInputStream("Dades/ActorssGenerals.llista");
+			FileInputStream file = new FileInputStream("Dades/ActorsGenerals.dades");
 			ObjectInputStream reader = new ObjectInputStream(file);
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
@@ -154,6 +153,7 @@ public class AnadirActorsGeneral {
 				for (Actor usuari : actors) {
 					  System.out.println(usuari.toString());
 					}
+				
 				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 			} catch (Exception ex) {
 				System.err.println("Final del fitxer");
@@ -196,17 +196,17 @@ public class AnadirActorsGeneral {
 	}
 	
 	public static String nombreActor() {
-		String nombre;
-		do {
-			nombre = entrada.nextLine();
-			nombre.trim();
-			if(nombre.equals("")) {
-				System.out.println("No pot estar la cadena buida, torna a introduir el nom");
-			}else if(!Pattern.compile("^[a-zA-Z]+$").matcher(nombre).matches()) {
-				System.out.println("El nom sols pot tindre lletres i una sola palabra");
-			}
-		}while(nombre.equals("") || !Pattern.compile("^[a-zA-Z]+$").matcher(nombre).matches());	
-		return nombre;
+	    String nombre;
+	    do {
+	        nombre = entrada.nextLine();
+	        nombre.trim();
+	        if(nombre.equals("")) {
+	            System.out.println("No pot estar la cadena buida, torna a introduir el nom");
+	        } else if(!Pattern.compile("^[\\p{L} ]+$").matcher(nombre).matches()) {
+	            System.out.println("El nom sols pot tindre lletres i una sola palabra");
+	        }
+	    } while(nombre.equals("") || !Pattern.compile("^[\\p{L} ]+$").matcher(nombre).matches());	
+	    return nombre;
 	}
 	
 	public static String nacionalitatActor() {
@@ -224,6 +224,7 @@ public class AnadirActorsGeneral {
 	public static String comprobarGenere() {
 		String genere;
 		do {
+			System.out.println("Introdueix el gènere. Utilitza 'M' per a home i 'F' per a dones.");
 			genere = entrada.nextLine();
 			genere.trim();
 			if(genere.equals("")) {
