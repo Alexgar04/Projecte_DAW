@@ -14,8 +14,8 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import com.projecte.eric.Menu2;
+import com.projecte.hector.ComprobarActor;
 import com.projecte.sergi.Actor;
-import com.projecte.sergi.Pelicula;
 
 public class AnadirActorsGeneral {
 	
@@ -37,14 +37,21 @@ public class AnadirActorsGeneral {
 		String nacionalidad;
 		String genero;
 		
-		System.out.println("Nombre Actor: ");
+		boolean difer = false;
+		int id;
+		do {
+			
+		
+		System.out.println("Nom de l'actor: ");
 		nombre = nombreActor();
+		difer = ComprobarActor.comprobarActor(nombre);
 		System.out.println("Nacionalitat: ");
 		nacionalidad = nacionalitatActor();
 		System.out.println("Gènere: ");
 		genero = comprobarGenere();
 		
-		int id = saberId();
+		id = saberId(true);
+		} while (difer);
 		
 		
 		
@@ -114,9 +121,9 @@ public class AnadirActorsGeneral {
 	public static void ficarActorsDefecte() {
 		File f = new File("Dades/ActorsGenerals.dades");
 	    if (!f.exists()) {
-	        actors.add(new Actor("Pedro", "España", "M", 1));
-	        actors.add(new Actor("Maria", "Colombia", "F", 2));
-	        actors.add(new Actor("David", "Ecuador", "M", 3));
+	        actors.add(new Actor("Pedro Picapiedra Martinez", "Espanya", "M", 1));
+	        actors.add(new Actor("Maria Vaño Blasco", "Colombia", "F", 2));
+	        actors.add(new Actor("David Calatayud Gimenez", "Equador", "M", 3));
 	        ObjectOutputStream oos = null;
 	        FileOutputStream fout = null;
 	        try {
@@ -148,7 +155,7 @@ public class AnadirActorsGeneral {
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				actors = (ArrayList<Actor>) reader.readObject();
-				System.out.println("Dades dels usuaris");
+				System.out.println("Dades dels actors");
 				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 				for (Actor usuari : actors) {
 					  System.out.println(usuari.toString());
@@ -163,37 +170,39 @@ public class AnadirActorsGeneral {
 			file.close();
 			Menu2 m = new Menu2();
 		} catch (Exception ex) {
-			System.out.println("No hi han actors encara, fica'n");
+			System.out.println("No hi ha actors encara, fica'n");
 		}
 	}
 	
-	public static int saberId() throws IOException {
-		File f = new File("contadoresId/contadorIdActors.txt");
-	    int id;
-	    
-	    // Abrir archivo para lectura
-	    try (Scanner leer = new Scanner(f)) {
-	        if (f.length() == 0) {
-	            // Si el archivo está vacío, escribir "0" y devolver 0
-	            try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
-	                bw.write("0");
-	            }
-	            return 0;
-	        } else {
-	            // Leer valor actual de id
-	            id = leer.nextInt();
-	            // Incrementar id
-	            id++;
-	        }
-	    }
-	    
-	    // Escribir nuevo valor de id en el archivo
-	    try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
-	        bw.write(String.valueOf(id));
-	    }
-	    
-	    return id;
-	}
+	public static int saberId(boolean incrementar) throws IOException {
+        File f = new File("contadoresId/contadorIdActors.txt");
+        int id;
+
+        // Obrir fitxer per a lectura
+        try (Scanner leer = new Scanner(f)) {
+            if (f.length() == 0) {
+                // Si el fitxer està buit, escriure "0" i retornar 0
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+                    bw.write("0");
+                }
+                return 0;
+            } else {
+                // Llegir valor actual de id
+                id = leer.nextInt();
+                // Incrementar id si s'indica
+                if (incrementar) {
+                    id++;
+                }
+            }
+        }
+
+        // Escriure nou valor de id en el fitxer
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+            bw.write(String.valueOf(id));
+        }
+
+        return id;
+    }
 	
 	public static String nombreActor() {
 	    String nombre;
@@ -202,10 +211,10 @@ public class AnadirActorsGeneral {
 	        nombre.trim();
 	        if(nombre.equals("")) {
 	            System.out.println("No pot estar la cadena buida, torna a introduir el nom");
-	        } else if(!Pattern.compile("^[\\p{L} ]+$").matcher(nombre).matches()) {
-	            System.out.println("El nom sols pot tindre lletres i una sola palabra");
+	        } else if(!Pattern.compile("^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$").matcher(nombre).matches()) {
+	            System.out.println("Ha d'estar compost pel nom i els dos cognoms");
 	        }
-	    } while(nombre.equals("") || !Pattern.compile("^[\\p{L} ]+$").matcher(nombre).matches());	
+	    } while(nombre.equals("") || !Pattern.compile("^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$").matcher(nombre).matches());	
 	    return nombre;
 	}
 	
@@ -224,15 +233,73 @@ public class AnadirActorsGeneral {
 	public static String comprobarGenere() {
 		String genere;
 		do {
-			System.out.println("Introdueix el gènere. Utilitza 'M' per a home i 'F' per a dones.");
+			System.out.println("Introdueix el gènere. Utilitza 'M' per a home i 'F' per a dona.");
 			genere = entrada.nextLine();
 			genere.trim();
 			if(genere.equals("")) {
 				System.out.println("No pot estar la cadena buida, torna a introduir el nom");
 			}else if(!genere.equalsIgnoreCase("M") && !genere.equalsIgnoreCase("F")) {
-				System.out.println("El genere introduit no exiseix, introdueix M o F");
+				System.out.println("El gènere introduït no existeix, introdueix M o F");
 			}
 		}while(genere.equals("") || !genere.equalsIgnoreCase("M") && !genere.equalsIgnoreCase("F"));	
 		return genere;
+	}
+	public static void demanarIdEliminarActor() {
+		mostrarActors();
+		int num = 0;
+		try {
+            saberId(false);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		
+			System.out.println("Introdueix l'Id del actor que vols eliminar, per a cancel·lar l'operació escriu \"0\"");
+			if (!entrada.hasNextInt()) {
+				System.out.println("El que has introduït, no és un número");
+				entrada.nextLine();
+			} else {
+				num = entrada.nextInt();
+				while(num < 0 || num > 2147483647) {
+					System.out.println("Número invàlid");
+					num = entrada.nextInt();
+				}
+				if (num == 0) {
+					Menu2 menu = new Menu2(); 
+			        menu.menuAdminActor(); 
+				}else {
+					// Eliminar un element del ArrayList
+					boolean encontrado = false;
+					
+					for (int i = 0; i < actors.size(); i++) {
+						if (actors.get(i).getId() == num) {
+							actors.remove(i);
+							encontrado = true;
+							break;
+						}
+					}
+
+					if (encontrado) {
+						System.out.println("S'ha eliminat un actor amb l'id " + num + ".");
+					} else {
+						System.out.println("No s'ha encontrat ningún actor amb l'id " + num + ".");
+					}
+
+					// Serialitzar el ArrayList actualitzat en el arxiu
+					try {
+						FileOutputStream fileOut = new FileOutputStream("Dades/ActorsGenerals.dades");
+						ObjectOutputStream out = new ObjectOutputStream(fileOut);
+						out.writeObject(actors);
+						out.close();
+						fileOut.close();
+					} catch (IOException i) {
+						i.printStackTrace();
+					}
+				}
+
+				}
+				
+		
+
 	}
 }

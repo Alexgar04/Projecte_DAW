@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.projecte.eric.Menu2;
+import com.projecte.hector.ComprobarPelicula;
 import com.projecte.sergi.Pelicula;
 
 public class AnadirPeliculaGeneral {
@@ -33,11 +34,19 @@ public class AnadirPeliculaGeneral {
 		Scanner entrada = new Scanner(System.in);
 		String pelicula;
 		int any;
-		System.out.println("Dime que película vols");
-		pelicula = nomPelicula();
-		System.out.println("De quin any es la pelicula");
-		any = anyPelicula();
-		int id = saberId();
+		boolean difer = false;
+		int id;
+		do {
+
+			System.out.println("Què pel·lícula vols afegir?");
+			pelicula = nomPelicula();
+			difer = ComprobarPelicula.comprobarPelicula(pelicula);
+			System.out.println("De quin any és la pel·lícula");
+			any = anyPelicula();
+			id = saberId(true);
+
+			System.out.println(difer);
+		} while (difer);
 
 		// Llegir datos existents en el codi per a que no sobreescribisca els datos
 		try {
@@ -123,7 +132,7 @@ public class AnadirPeliculaGeneral {
 			try {
 				// llegim l'objecte que hi ha al fitxer (1 sol array List)
 				pelicules = (ArrayList<Pelicula>) reader.readObject();
-				System.out.println("Películes en la llista general");
+				System.out.println("Pel·lícules en la llista general");
 				System.out.println(
 						" +----------------------------------------------------------------------------------------+ ");
 				for (Pelicula usuari : pelicules) {
@@ -139,36 +148,38 @@ public class AnadirPeliculaGeneral {
 			file.close();
 			Menu2 m = new Menu2();
 		} catch (Exception ex) {
-			System.out.println("No hi han pelicules encara, fica'n");
+			System.out.println("No hi ha pel·lícules encara, fica'n");
 		}
 	}
 
-	public static int saberId() throws IOException {
-		File f = new File("contadoresId/contadorIdPelis.txt");
-		int id;
+	public static int saberId(boolean incrementar) throws IOException {
+	    File f = new File("contadoresId/contadorIdPelis.txt");
+	    int id;
 
-		// Abrir archivo para lectura
-		try (Scanner leer = new Scanner(f)) {
-			if (f.length() == 0) {
-				// Si el archivo está vacío, escribir "0" y devolver 0
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
-					bw.write("0");
-				}
-				return 0;
-			} else {
-				// Leer valor actual de id
-				id = leer.nextInt();
-				// Incrementar id
-				id++;
-			}
-		}
+	    // Obrir fitxer per a lectura
+	    try (Scanner leer = new Scanner(f)) {
+	        if (f.length() == 0) {
+	            // Si el fitxer està buit, escriure "0" i retornar 0
+	            try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	                bw.write("0");
+	            }
+	            return 0;
+	        } else {
+	            // Llegir valor actual de id
+	            id = leer.nextInt();
+	            // Incrementar id si s'indica
+	            if (incrementar) {
+	                id++;
+	            }
+	        }
+	    }
 
-		// Escribir nuevo valor de id en el archivo
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
-			bw.write(String.valueOf(id));
-		}
+	    // Escriure nou valor de id en el fitxer
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	        bw.write(String.valueOf(id));
+	    }
 
-		return id;
+	    return id;
 	}
 
 	public static String nomPelicula() {
@@ -187,16 +198,74 @@ public class AnadirPeliculaGeneral {
 		int n;
 		do {
 			while (!entrada.hasNextInt()) {
-				System.out.println("El valor introduit no és un número");
+				System.out.println("El valor introduït no és un número");
 				entrada.next();
 			}
 			n = entrada.nextInt();
 			if (n < 1940 || n > 2023) {
-				System.out.println("El valor introduit está fora del rang");
+				System.out.println("El valor introduït està fora del rang");
 			}
 		} while (n < 1940 || n > 2023);
 
 		return n;
+	}
+	public static void demanarIdEliminarPelicula() {
+		mostrarPelicules();
+		int num = 0;
+		try {
+		    saberId(false);
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		
+			System.out.println("Introdueix l'Id de la pel·lícula que vols eliminar, per a cancel·lar l'operació escriu \"0\"");
+			if (!entrada.hasNextInt()) {
+				System.out.println("El que has introduït, no és un número");
+				entrada.nextLine();
+			} else {
+				num = entrada.nextInt();
+				while(num < 0 || num > 2147483647) {
+					System.out.println("Número invàlid");
+					num = entrada.nextInt();
+				}
+				if (num == 0) {
+					Menu2 menu = new Menu2(); 
+			        menu.menuAdminActor(); 
+				}else {
+					// Eliminar un element del ArrayList
+					boolean encontrado = false;
+					
+					for (int i = 0; i < pelicules.size(); i++) {
+						if (pelicules.get(i).getId() == num) {
+							pelicules.remove(i);
+							encontrado = true;
+							break;
+						}
+					}
+
+					if (encontrado) {
+						System.out.println("S'ha eliminat una pel·lícula amb l'id " + num + ".");
+					} else {
+						System.out.println("No s'ha encontrat cap pel·lícula amb l'id " + num + ".");
+					}
+
+					// Serialitzar el ArrayList actualitzat en el arxiu
+					try {
+						FileOutputStream fileOut = new FileOutputStream("Dades/PeliculesGenerals.dades");
+						ObjectOutputStream out = new ObjectOutputStream(fileOut);
+						out.writeObject(pelicules);
+						out.close();
+						fileOut.close();
+					} catch (IOException i) {
+						i.printStackTrace();
+					}
+				}
+
+				}
+				
+		
+
 	}
 
 }

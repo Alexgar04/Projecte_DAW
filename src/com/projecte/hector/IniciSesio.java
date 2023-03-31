@@ -56,7 +56,7 @@ public class IniciSesio {
 					String usuario_b = arrayLinea[1];
 					if(contrasena_b.equals(contrasena) && usuario_b.equals(usuario)) {
 						if (usuario_b.equals("admin")) {
-							System.out.println("eres el admin");
+							System.out.println("Benvingut administrador");
 							Menu2 m = new Menu2();
 							m.mostrarMenu2Admin();
 						}else {
@@ -85,7 +85,7 @@ public class IniciSesio {
 		}
 	       
 	    } else {
-	        System.out.println("El usuari introduit no existeix");
+	        System.out.println("L'usuari introduit no existeix");
 	        Comprobacion c = new Comprobacion();
             c.comprobacion();
 		}

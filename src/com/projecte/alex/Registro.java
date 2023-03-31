@@ -7,6 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,32 +37,31 @@ public class Registro{
 		String poblacion;
 		String nombre = PedirUser();
 		do {
-			System.out.println("Apellidos: ");
+			System.out.println("Cognoms: ");
 			nomApell = entrada.nextLine();
 			nomApell.replace("  ", "");
 			while (nomApell.contains("::")) {
-				System.out.println("No se puede poner este caracter \"::\" ");
+				System.out.println("No és pot ficar aquest caràcter \"::\" ");
 				entrada.nextLine();
 			}
 		} while (nomApell.length() < 5);
-
-		System.out.println("Introduce tu correo electronico ");
+		System.out.println("Introdueix el teu correu electrònic ");
 		String correo = entrada.nextLine();
 		while (!Pattern.compile("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$").matcher(correo).matches()) {
-			System.out.println("Introduce un correo valido");
+			System.out.println("Introdueix un correu vàlid");
 			correo = entrada.nextLine();
 			while (correo.contains("::")) {
-				System.out.println("No se puede poner este caracter \"::\" ");
+				System.out.println("No es pot ficar aquest caràcter \"::\" ");
 				entrada.nextLine();
 
 			}
 		}
 		do {
-			System.out.println("Poblacion: ");
+			System.out.println("Població: ");
 			poblacion = entrada.nextLine();
 			poblacion = poblacion.replace(" ", "");
 			while (poblacion.contains("::")) {
-				System.out.println("No se puede poner este caracter \"::\" ");
+				System.out.println("No es pot ficar aquest caràcter \"::\" ");
 				entrada.nextLine();
 
 			}
@@ -68,7 +70,7 @@ public class Registro{
 
 		String fechaNacimiento;
 		do {
-			System.out.println("Introduce una fecha de nacimiento en formato dd/mm/aaaa");
+			System.out.println("Introdueix una data de naixement en format dd/mm/aaaa");
 			fechaNacimiento = entrada.nextLine();
 		} while (!Pattern.compile("^\\d{2}/\\d{2}/\\d{4}$").matcher(fechaNacimiento).matches());
 
@@ -76,19 +78,19 @@ public class Registro{
 		String compContraseña;
 		do {
 			do {
-				System.out.println("Introduce contraseña de al menos 5 caracteres: ");
+				System.out.println("Introdueix contrasenya d'almenys 5 caràcters: ");
 				contraseña = entrada.nextLine();
 				while (contraseña.contains("::")) {
-					System.out.println("No se puede poner este caracter \"::\" ");
+					System.out.println("No es pot ficar aquest caràcter \"::\" ");
 					entrada.nextLine();
 
 				}
 			} while (contraseña.length() < 5);
 
-			System.out.println("Vuelve a introducir la contraseña");
+			System.out.println("Torna a introduir la contrasenya");
 			compContraseña = entrada.nextLine();
 			if (!contraseña.equals(compContraseña)) {
-				System.out.println("Error las contraseñas introducidas no coinciden");
+				System.out.println("Error las contrasenyes introduïdes no coincideixen");
 			}
 		} while (!contraseña.equals(compContraseña));
 
@@ -193,9 +195,10 @@ public class Registro{
 		File User = new File("Usuarios/" + nombreUser);
 		boolean creacion = User.mkdir();
 		if (creacion) {
-			System.out.println("El usuario " + nombreUser + " se ha creado correctamente");
+
+			System.out.println("El usuari " + nombreUser + " s'ha creat correctament");
 		} else {
-			System.out.println("Algo ha fallado intentelo de nuevo mas tarde");
+			System.out.println("Alguna cosa ha fallat intenta-ho de nou més tard");
 		}
 	}
 
@@ -236,11 +239,11 @@ public class Registro{
 	public String PedirUser() {
 		String nombreUser;
 		do {
-			System.out.println("Introduce tu nombre: ");
+			System.out.println("Introdueix el teu nom: ");
 			nombreUser = entrada.nextLine();
 			nombreUser = nombreUser.replace(" ", "").replace("  ", "");
 			while (nombreUser.contains("::")) {
-				System.out.println("No se puede poner este caracter \"::\" ");
+				System.out.println("No es pot ficar aquest caràcter \"::\" ");
 				nombreUser = entrada.nextLine();
 				nombreUser = nombreUser.replace(" ", "").replace("  ", "");
 			}
@@ -252,7 +255,7 @@ public class Registro{
 	}
 
 	public void mensajeBienvenida(String nom) {
-		System.out.println("Hola Bienvendido: " + nom);
+		System.out.println("Hola Benvingut: " + nom);
 		Comprobacion c = new Comprobacion();
 		c.comprobacion();
 
@@ -261,6 +264,10 @@ public class Registro{
 	public void escribirInformacion(int id, String nomUser, String nombreUser, String nomApell, String poblacion,
 			String contraseña, String correo) {
 		File escInfo = new File("UsersInfo/UsersInfo.txt");
+		
+//		Path origen = Paths.get("imagenes/imagen.jpg");
+//		Path destino = Paths.get(carpetaPersonal.toString(), "imagen.jpg");
+//        Files.copy(origen, destino);
 		try {
 			FileWriter escribir = new FileWriter(escInfo, true);
 			escribir.write(+id + "::" + nomUser + "::" + nombreUser + "::" + nomApell + "::" + correo + "::" + poblacion

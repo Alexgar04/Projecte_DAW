@@ -1,11 +1,9 @@
 package com.projecte.alex;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,8 +14,8 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import com.projecte.eric.Menu2;
+import com.projecte.hector.ComprobarDirector;
 import com.projecte.sergi.Director;
-import com.projecte.sergi.Pelicula;
 
 public class AnadirDirectorsGeneral {
 	private static List<Director> directors = new ArrayList<>();
@@ -37,13 +35,23 @@ public class AnadirDirectorsGeneral {
 		String nacionalidad;
 		String genero;
 
-		System.out.println("Nombre Director: ");
+		boolean difer = false;
+		int id;
+		
+		do {
+		entrada.nextLine();
+		System.out.println("Nombre director: ");
 		nombre = nombreDirector();
-		System.out.println("Nacionalidad: ");
+		difer = ComprobarDirector.comprobarDirector(nombre);
+		System.out.println("Nacionalitat: ");
 		nacionalidad = nacionalitatDirector();
-		System.out.println("Genere(M/F): ");
+		System.out.println("Gènere(M/F): ");
 		genero = comprobarGenere();
-		int id = saberId();
+		id = saberId(true);
+		
+		
+		
+		} while (difer);
 
 		// Llegir datos existents en el codi per a que no sobreescribisca els datos
 		try {
@@ -99,11 +107,11 @@ public class AnadirDirectorsGeneral {
 			ObjectInputStream reader = new ObjectInputStream(file);
 			try {
 
-				System.out.println("Dades dels usuaris");
+				
 				// llegim l'objecte que hi ha al fitxer (1 sol array List)
 				directors = (ArrayList<Director>) reader.readObject();
 
-				System.out.println("Dades dels usuaris");
+				System.out.println("Dades dels directors");
 				System.out.println(
 						" +----------------------------------------------------------------------------------------+ ");
 				for (Director usuari : directors) {
@@ -118,16 +126,16 @@ public class AnadirDirectorsGeneral {
 			file.close();
 			Menu2 m = new Menu2();
 		} catch (Exception ex) {
-			System.out.println("No hi han directors encara, fica'n");
+			System.out.println("No hi ha directors encara, fica'n");
 		}
 	}
 
 	public static void ficarDirectorsDefecte() {
 		File f = new File("Dades/DirectorsGenerals.dades");
 		if (!f.exists()) {
-			directors.add(new Director("Vicente", "España", "M", 1));
-			directors.add(new Director("Jesus", "Francia", "M", 2));
-			directors.add(new Director("Will", "Inglaterra", "M", 3));
+			directors.add(new Director("Vicente Belda Navarro", "Espanya", "M", 1));
+			directors.add(new Director("Jesus Briones Ubon", "França", "M", 2));
+			directors.add(new Director("Will Smith Pechugon", "Inglaterra", "M", 3));
 			ObjectOutputStream oos = null;
 			FileOutputStream fout = null;
 			try {
@@ -153,45 +161,48 @@ public class AnadirDirectorsGeneral {
 		}
 	}
 
-	public static int saberId() throws IOException {
-		File f = new File("contadoresId/contadorIdDirectors.txt");
-		int id;
+	public static int saberId(boolean incrementar) throws IOException {
+	    File f = new File("contadoresId/contadorIdDirectors.txt");
+	    int id;
 
-		// Abrir archivo para lectura
-		try (Scanner leer = new Scanner(f)) {
-			if (f.length() == 0) {
-				// Si el archivo está vacío, escribir "0" y devolver 0
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
-					bw.write("0");
-				}
-				return 0;
-			} else {
-				// Leer valor actual de id
-				id = leer.nextInt();
-				// Incrementar id
-				id++;
-			}
-		}
+	    // Obrir fitxer per a lectura
+	    try (Scanner leer = new Scanner(f)) {
+	        if (f.length() == 0) {
+	            // Si el fitxer està buit, escriure "0" i retornar 0
+	            try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	                bw.write("0");
+	            }
+	            return 0;
+	        } else {
+	            // Llegir valor actual de id
+	            id = leer.nextInt();
+	            // Incrementar id si s'indica
+	            if (incrementar) {
+	                id++;
+	            }
+	        }
+	    }
 
-		// Escribir nuevo valor de id en el archivo
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
-			bw.write(String.valueOf(id));
-		}
+	    // Escriure nou valor de id en el fitxer
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+	        bw.write(String.valueOf(id));
+	    }
 
-		return id;
+	    return id;
 	}
 
 	public static String nombreDirector() {
+		
 		String nombre;
 		do {
 			nombre = entrada.nextLine();
 			nombre.trim();
 			if (nombre.equals("")) {
 				System.out.println("No pot estar la cadena buida, torna a introduir el nom");
-			} else if (!Pattern.compile("^[a-zA-Z]+$").matcher(nombre).matches()) {
-				System.out.println("El nom sols pot tindre lletres i una sola palabra");
+			} else if (!Pattern.compile("^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$").matcher(nombre).matches()) {
+				System.out.println("Ha d'estar compost pel nom i els dos cognoms. No pot estar la cadena buida, torna a introduir el nom.");
 			}
-		} while (nombre.equals("") || !Pattern.compile("^[a-zA-Z]+$").matcher(nombre).matches());
+		} while (nombre.equals("") || !Pattern.compile("^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$").matcher(nombre).matches());
 		return nombre;
 	}
 
@@ -215,9 +226,67 @@ public class AnadirDirectorsGeneral {
 			if (genere.equals("")) {
 				System.out.println("No pot estar la cadena buida, torna a introduir el nom");
 			} else if (!genere.equalsIgnoreCase("M") && !genere.equalsIgnoreCase("F")) {
-				System.out.println("El genere introduit no exiseix, introdueix M o F");
+				System.out.println("El gènere introduït no existeix, introdueix M o F");
 			}
 		} while (genere.equals("") || !genere.equalsIgnoreCase("M") && !genere.equalsIgnoreCase("F"));
 		return genere;
+	}
+	public static void demanarIdEliminarDirector() {
+		mostrarDirectors();
+		int num = 0;
+		try {
+		    saberId(false);
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		
+			System.out.println("Introdueix l'Id del actor que vols eliminar, per a cancel·lar l'operació escriu \"0\"");
+			if (!entrada.hasNextInt()) {
+				System.out.println("El que has introduït, no és un número");
+				entrada.nextLine();
+			} else {
+				num = entrada.nextInt();
+				while(num < 0 || num > 2147483647) {
+					System.out.println("Numero invalid");
+					num = entrada.nextInt();
+				}
+				if (num == 0) {
+					Menu2 menu = new Menu2(); 
+			        menu.menuAdminDirector(); 
+				}else {
+					// Eliminar un element del ArrayList
+					boolean encontrado = false;
+					
+					for (int i = 0; i < directors.size(); i++) {
+						if (directors.get(i).getId() == num) {
+							directors.remove(i);
+							encontrado = true;
+							break;
+						}
+					}
+
+					if (encontrado) {
+						System.out.println("S'ha eliminat un director amb l'id " + num + ".");
+					} else {
+						System.out.println("No s'ha trobat cap director amb l'id " + num + ".");
+					}
+
+					// Serialitzar el ArrayList actualitzat en el arxiu
+					try {
+						FileOutputStream fileOut = new FileOutputStream("Dades/DirectorsGenerals.dades");
+						ObjectOutputStream out = new ObjectOutputStream(fileOut);
+						out.writeObject(directors);
+						out.close();
+						fileOut.close();
+					} catch (IOException i) {
+						i.printStackTrace();
+					}
+				}
+
+				}
+				
+		
+
 	}
 }

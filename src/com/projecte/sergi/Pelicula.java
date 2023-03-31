@@ -46,6 +46,6 @@ public class Pelicula implements Serializable {
 	}
 
 	public String toString() {
-		return "Id: " +this.id+ " Titul: " + this.titulo + " / Año: " + this.año;
+		return "Id: " +this.id+ " Títol: " + this.titulo + " / Any: " + this.año;
 	}
 }

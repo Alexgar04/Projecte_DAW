@@ -11,26 +11,30 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.projecte.hector.IniciSesio;
+import com.projecte.sergi.Actor;
 import com.projecte.sergi.Director;
 
 public class AnadirDirectorsPersonal {
 	private static List<Director> directorPersonals = new ArrayList<Director>();
+	static Scanner entrada = new Scanner(System.in);
 	private String nomUsuari;
 	
 	public static void añadirDirectorPersonal() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Que director vols anyadir a la teua llista");
+		mostrarDirectorPersonal();
+		System.out.println("Què director vols afegir a la teua llista?");
 		AnadirDirectorsGeneral.mostrarDirectors();
 		int n = 0;
 		int num_max = idDirector();
 		do {
 			while(!entrada.hasNextInt()) {
 				System.out.println("El valor no és un número");
+				entrada.nextLine();
 			}
 			n = entrada.nextInt();
 			
 			if(n < 0 || n > num_max) {
-				System.out.println("El valor esta fora del rang");
+				System.out.println("El valor està fora del rang");
 			}
 		}while(n < 0 || n > num_max);
 		
@@ -51,31 +55,45 @@ public class AnadirDirectorsPersonal {
 		        } catch (ClassNotFoundException e) {
 		            e.printStackTrace();
 		        }
-		        
-		        directorPersonals.add(director);
-				
-				ObjectOutputStream oos = null;
-				FileOutputStream fout = null;
-				try {
-					//obrim el fitxer per escriure, sense afegir
-					//només tindrem un ArrayList d'objectes
-					fout = new FileOutputStream("Usuarios/"+nomUsuari+"/dades/Directors.llista", false);
-					oos = new ObjectOutputStream(fout);
-					//escrivim ArrayList sencer en el fitxer (1 sol objecte)
-					oos.writeObject(directorPersonals);
-					oos.flush();
-					oos.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				} finally {
-					if (oos != null) {
-						try {
-							oos.close();
-						} catch (Exception ex) {
-							ex.printStackTrace();
+		        boolean encontrada = false;
+		        for (Director directorPer: directorPersonals) {
+	                if (n == directorPer.getId()) {
+	                    System.out.println("Error el que has introduït ja està en la llista personal");
+	                    encontrada = true;
+	                    break;
+	                }
+	            }
+	            if (!encontrada) {
+			        directorPersonals.add(director);
+	                System.out.println("Director afegit");
+	                ObjectOutputStream oos = null;
+					FileOutputStream fout = null;
+					try {
+						//obrim el fitxer per escriure, sense afegir
+						//només tindrem un ArrayList d'objectes
+						fout = new FileOutputStream("Usuarios/"+nomUsuari+"/dades/Directors.llista", false);
+						oos = new ObjectOutputStream(fout);
+						//escrivim ArrayList sencer en el fitxer (1 sol objecte)
+						oos.writeObject(directorPersonals);
+						oos.flush();
+						oos.close();
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					} finally {
+						if (oos != null) {
+							try {
+								oos.close();
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
 						}
 					}
-				}
+
+
+	            }
+		        
+				
+				
 			}
 		}
 		
@@ -102,7 +120,7 @@ public class AnadirDirectorsPersonal {
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				directorPersonals = (ArrayList<Director>) reader.readObject();
-				System.out.println("Pelicules en la llista personal");
+				System.out.println("Directors en la llista personal");
 				System.out.println(" +----------------------------------------------------------------------------------------+ ");
 				for (Director usuari : directorPersonals) {
 					  System.out.println(usuari.toString());
@@ -115,7 +133,75 @@ public class AnadirDirectorsPersonal {
 			reader.close();
 			file.close();
 		} catch (Exception ex) {
-			System.out.println("No hi han directors en la llista personal encara, fica'n");
+			System.out.println("No hi ha directors en la llista personal encara, fica'n");
+		}
+	}
+	public static void eliminarDirector() {
+		mostrarDirectorPersonal();
+		if (directorPersonals.size() != 0) {
+			int numCancelar = 0;
+			int numUsuario;
+			boolean encontrado = false;
+			do {
+				do {
+					System.out.println("Què director vols eliminar?");
+					System.out.println("Si vols cancel·lar fica: " + numCancelar);
+					while (!entrada.hasNextInt()) {
+						System.out.println("El valor no és un número");
+						entrada.next();
+					}
+					numUsuario = entrada.nextInt();
+					if (numUsuario < 1 || numUsuario > numCancelar) {
+						System.out.println("El número està fora del rang");
+					}
+				} while (numUsuario < 0 || numUsuario > 2147483647);
+				// LLevar a partir del contador, el getId() i el numUsuari borrar el director si
+				// conincideix el numero
+				for (int i = 0; i < directorPersonals.size(); i++) {
+					Director director = directorPersonals.get(i);
+					if (director.getId() == numUsuario) {
+						directorPersonals.remove(i);
+						encontrado = true;
+					}
+				}
+				// Si el id del director no esta en ixe rang de numeros se indica i se torna a
+				// demanar el id a eliminar
+				if (!encontrado && numUsuario != numCancelar) {
+					System.out.println("El director eixe no està en la llista personal");
+				}
+				if (numUsuario == numCancelar) {
+					System.out.println("Has elegit cancel·lar l'eliminació");
+				}
+			} while (!encontrado && numUsuario != numCancelar);
+
+			if (encontrado) {
+				System.out.println("S'ha eliminat correctament el director");
+				String nomUsuari = IniciSesio.getUsuario();
+
+				ObjectOutputStream oos = null;
+				FileOutputStream fout = null;
+				try {
+					// obrim el fitxer per escriure, sense afegir
+					// només tindrem un ArrayList d'objectes
+					fout = new FileOutputStream("Usuarios/" + nomUsuari + "/dades/Directors.llista", false);
+					oos = new ObjectOutputStream(fout);
+					// escrivim ArrayList sencer en el fitxer (1 sol objecte)
+					oos.writeObject(directorPersonals);
+					oos.flush();
+					oos.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					if (oos != null) {
+						try {
+							oos.close();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
+			}
+
 		}
 	}
 }

@@ -66,8 +66,8 @@ public class Usuari implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Usuari [id=" + id+"" + ", nomUser=" + nomUser + ", nombreUser=" + nombreUser + ", nomApell=" + nomApell
-				+ ", correo=" + correo + ", contrasenya=" + contrasenya + ", poblacion=" + poblacion + "]";
+		return "Usuari [id=" + id+"" + ", nomUser=" + nomUser + ", nombreUser=" + nombreUser + ", nomCognoms=" + nomApell
+				+ ", correu=" + correo + ", contrasenya=" + contrasenya + ", població=" + poblacion + "]";
 	}
 	
 	

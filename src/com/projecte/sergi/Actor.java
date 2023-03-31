@@ -54,7 +54,7 @@ public class Actor implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Id: "+ id + " Nom: " + nombre + ", Nacionalitat: " + nacionalidad + ", Genere: " + genero;
+			return "Id: "+ id + " Nom: " + nombre + ", Nacionalitat: " + nacionalidad + ", Gènere: " + genero;
 		}
 		
 		
