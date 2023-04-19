@@ -8,13 +8,27 @@ public class Director implements Serializable {
 		private String nacionalidad;
 		private String genero;
 		private int id;
+		private  String nomCreador;
+		
 		// Constructor de la clase Director
 		public Director(String nombre, String nacionalidad, String genero, int id) {
 			this.nombre = nombre;
 			this.nacionalidad = nacionalidad;
 			this.genero = genero;
 			this.id = id;
+			
 		}
+		
+		public Director(String nombre, String nacionalidad, String genero, int id,String nomCreador) {
+			this.nombre = nombre;
+			this.nacionalidad = nacionalidad;
+			this.genero = genero;
+			this.id = id;
+			this.setNomCreador(nomCreador);
+			
+		}
+		
+		
 
 		// Métodos getter y setter para cada atributo
 		
@@ -53,7 +67,15 @@ public class Director implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Id: "+id+ " Nom: " + nombre + ", Nacionalitat: " + nacionalidad + ", Gènere: " + genero;
+			return "Id: "+id+ " Nom: " + nombre + ", Nacionalitat: " + nacionalidad + ", Genere: " + genero+" / Creador: "+this.nomCreador;
+		}
+
+		public String getNomCreador() {
+			return nomCreador;
+		}
+
+		public void setNomCreador(String nomCreador) {
+			this.nomCreador = nomCreador;
 		}
 		
 		

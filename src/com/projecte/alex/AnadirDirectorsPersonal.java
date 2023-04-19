@@ -19,10 +19,18 @@ public class AnadirDirectorsPersonal {
 	static Scanner entrada = new Scanner(System.in);
 	private String nomUsuari;
 	
+	
+	
+	public static List<Director> getDirectorPersonals() {
+		return directorPersonals;
+	}
+	public static void setDirectorPersonals(List<Director> directorPersonals) {
+		AnadirDirectorsPersonal.directorPersonals = directorPersonals;
+	}
 	public static void añadirDirectorPersonal() {
 		Scanner entrada = new Scanner(System.in);
 		mostrarDirectorPersonal();
-		System.out.println("Què director vols afegir a la teua llista?");
+		System.out.println("Que director vols anyadir a la teua llista");
 		AnadirDirectorsGeneral.mostrarDirectors();
 		int n = 0;
 		int num_max = idDirector();
@@ -34,7 +42,7 @@ public class AnadirDirectorsPersonal {
 			n = entrada.nextInt();
 			
 			if(n < 0 || n > num_max) {
-				System.out.println("El valor està fora del rang");
+				System.out.println("El valor esta fora del rang");
 			}
 		}while(n < 0 || n > num_max);
 		
@@ -58,14 +66,14 @@ public class AnadirDirectorsPersonal {
 		        boolean encontrada = false;
 		        for (Director directorPer: directorPersonals) {
 	                if (n == directorPer.getId()) {
-	                    System.out.println("Error el que has introduït ja està en la llista personal");
+	                    System.out.println("Error lo que has introducido ya esta en la lista personal");
 	                    encontrada = true;
 	                    break;
 	                }
 	            }
 	            if (!encontrada) {
 			        directorPersonals.add(director);
-	                System.out.println("Director afegit");
+	                System.out.println("Director añadido");
 	                ObjectOutputStream oos = null;
 					FileOutputStream fout = null;
 					try {
@@ -133,7 +141,7 @@ public class AnadirDirectorsPersonal {
 			reader.close();
 			file.close();
 		} catch (Exception ex) {
-			System.out.println("No hi ha directors en la llista personal encara, fica'n");
+			System.out.println("No hi han directors en la llista personal encara, fica'n");
 		}
 	}
 	public static void eliminarDirector() {
@@ -144,15 +152,15 @@ public class AnadirDirectorsPersonal {
 			boolean encontrado = false;
 			do {
 				do {
-					System.out.println("Què director vols eliminar?");
-					System.out.println("Si vols cancel·lar fica: " + numCancelar);
+					System.out.println("Que director vols eliminar");
+					System.out.println("Si vols cancelar fica: " + numCancelar);
 					while (!entrada.hasNextInt()) {
-						System.out.println("El valor no és un número");
+						System.out.println("El valor no es un número");
 						entrada.next();
 					}
 					numUsuario = entrada.nextInt();
-					if (numUsuario < 1 || numUsuario > numCancelar) {
-						System.out.println("El número està fora del rang");
+					if (numUsuario < 1 || numUsuario > 2147483647) {
+						System.out.println("El número esta fora del rang");
 					}
 				} while (numUsuario < 0 || numUsuario > 2147483647);
 				// LLevar a partir del contador, el getId() i el numUsuari borrar el director si
@@ -167,10 +175,10 @@ public class AnadirDirectorsPersonal {
 				// Si el id del director no esta en ixe rang de numeros se indica i se torna a
 				// demanar el id a eliminar
 				if (!encontrado && numUsuario != numCancelar) {
-					System.out.println("El director eixe no està en la llista personal");
+					System.out.println("El director ixe no esta en la llista personal");
 				}
 				if (numUsuario == numCancelar) {
-					System.out.println("Has elegit cancel·lar l'eliminació");
+					System.out.println("Has elegit cancelar la eliminació");
 				}
 			} while (!encontrado && numUsuario != numCancelar);
 

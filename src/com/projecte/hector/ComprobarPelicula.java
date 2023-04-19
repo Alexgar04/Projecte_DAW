@@ -29,7 +29,7 @@ public class ComprobarPelicula {
 				if (nom.equalsIgnoreCase(titulo)) {
 
 					
-					System.out.println("Està repetit");
+					System.out.println("Está repetit");
 					Menu2 menu2 = new Menu2();
 					menu2.mostrarpelicules();
 					 

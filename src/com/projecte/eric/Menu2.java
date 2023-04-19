@@ -10,24 +10,32 @@ import com.projecte.alex.AnadirDirectorsPersonal;
 import com.projecte.alex.AnadirPeliculaGeneral;
 import com.projecte.alex.AnadirPeliculaPersonal;
 import com.projecte.alex.Comprobacion;
+import com.projecte.alex.Imagen;
+import com.projecte.hector.IniciSesio;
 
 
 public class Menu2 {
 
 	public int mostrarMenu2() {
+		
+		ComprobacionListas.comprobarGeneralActors();
+		ComprobacionListas.comprobarGeneralPelicules();
+        ComprobacionListas.comprobarGeneralDirectors();
 
 		Scanner entrada = new Scanner(System.in);
 		int opcio = 0;
 		boolean semafor = false;
 		while (!semafor) {
 			
-			System.out.println(" +------------------------------+ ");
-			System.out.println(" |     Menú principal           |" );
-			System.out.println(" | 1. Accedir menú directors    |");
-			System.out.println(" | 2. Accedir menú actors       |");
-			System.out.println(" | 3. Accedir menú pel·lícules  |");
-			System.out.println(" | 4. Tancar sessió             |");
-			System.out.println(" +------------------------------+ ");
+			System.out.println(" +----------------------------+ ");
+			System.out.println(" |     Menú principal         |" );
+			System.out.println(" | 1. Accedir menú directors  |");
+			System.out.println(" | 2. Accedir menú actors     |");
+			System.out.println(" | 3. Accedir menú películes  |");
+			System.out.println(" | 4. Canviar Imatge Perfil   |");
+			System.out.println(" | 5. Mostrar Imagen Perfil   |");
+			System.out.println(" | 6. Tancar sesió            |");
+			System.out.println(" +----------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
@@ -45,7 +53,18 @@ public class Menu2 {
 					semafor = true;
 					break;
 				case 4:
-			
+					String nomUser = IniciSesio.getUsuario();
+					Imagen.canviarImagen(nomUser);
+					Menu2 m = new Menu2();
+					m.mostrarMenu2();
+					break;
+					
+				case 5:
+					Imagen.mostrarImagen();
+					Menu2 me = new Menu2();
+					me.mostrarMenu2();
+					break;
+				case 6:
 					System.out.println("El programa ha sigut tancat");
 					Comprobacion c = new Comprobacion();
 			        c.comprobacion();
@@ -57,7 +76,7 @@ public class Menu2 {
 				}
 
 			} catch (Exception e) {
-				System.out.print("Error: L'entrada no és un enter.");
+				System.out.print("Error: La entrada no és un enter.");
 				entrada.nextLine();
 				System.out.println("");
 				System.out.println("");
@@ -84,7 +103,7 @@ public class Menu2 {
 			System.out.println(" | 3. Afegir director a llista general         |");
 			System.out.println(" | 4. Afegir director a llista personal        |");
 			System.out.println(" | 5. Eliminar director de la llista personal  |");
-			System.out.println(" | 6. Tornar al menú d'inici                   |");
+			System.out.println(" | 6. Tornar al menú de inici                  |");
 			System.out.println(" +---------------------------------------------+ ");
 
 			try {
@@ -98,7 +117,7 @@ public class Menu2 {
 					semafor = true;
 					break;
 				case 2:
-					System.out.println("Llista personal ->");
+					System.out.println("llista personal ->");
 					AnadirDirectorsPersonal.mostrarDirectorPersonal();
 					mostrardirectors();
 					semafor = true;
@@ -124,7 +143,7 @@ public class Menu2 {
 					break;
 				case 6:
 
-					System.out.println("Has tornat a l'inici->");
+					System.out.println("Has tornat al inici->");
 					mostrarMenu2();
 					semafor = true;
 					break;
@@ -135,7 +154,7 @@ public class Menu2 {
 				}
 
 			} catch (Exception e) {
-				System.out.print("Error: L'entrada no és un enter.");
+				System.out.print("Error: La entrada no és un enter.");
 				entrada.nextLine();
 				System.out.println("");
 				System.out.println("");
@@ -154,15 +173,15 @@ public class Menu2 {
 		boolean semafor = false;
 		int opcio = 0;
 		while (!semafor) {
-			System.out.println(" +-------------------------------------------------+ ");
-			System.out.println(" |       Menú de pel·lícules                       |");
-			System.out.println(" | 1. Mostrar llista general                       |");
-			System.out.println(" | 2. Mostrar llista personal                      |");
-			System.out.println(" | 3. Afegir pel·lícula a llista general           |");
-			System.out.println(" | 4. Afegir pel·lícula a llista personal          |");
-			System.out.println(" | 5. Eliminar pel·lícula de la llista personal    |");
-			System.out.println(" | 6. Tornar al menú d'inici                       |");
-			System.out.println(" +-------------------------------------------------+ ");
+			System.out.println(" +-----------------------------------------------+ ");
+			System.out.println(" |       Menú de películes                       |");
+			System.out.println(" | 1. Mostrar llista general                     |");
+			System.out.println(" | 2. Mostrar llista personal                    |");
+			System.out.println(" | 3. Afegir película a llista general           |");
+			System.out.println(" | 4. Afegir película a llista personal          |");
+			System.out.println(" | 5. Eliminar película de la llista personal    |");
+			System.out.println(" | 6. Tornar al menú de inicio                   |");
+			System.out.println(" +-----------------------------------------------+ ");
 
 
 			try {
@@ -170,28 +189,28 @@ public class Menu2 {
 				switch (opcio) {
 				case 1:
 
-					System.out.println("Llista general ->");
+					System.out.println("llista general ->");
 					AnadirPeliculaGeneral.mostrarPelicules();
 					mostrarpelicules();
 					semafor = true;
 					break;
 				case 2:
 
-					System.out.println("Llista personal ->");	
+					System.out.println("llista personal ->");	
 					AnadirPeliculaPersonal.mostrarPeliculasPersonal();;
 					mostrarpelicules();
 					semafor = true;
 					break;
 				case 3:
 
-					System.out.println("Afegir pel·lícules a la llista general->");
+					System.out.println("Afegir pelicules a la llista general->");
 					AnadirPeliculaGeneral.pedirInfo();
 					mostrarpelicules();
 					semafor = true;
 					break;
 				case 4:
 
-					System.out.println("Afegir pel·lícules a la llista personal->");
+					System.out.println("Afegir pelicules a la llista personal->");
 					AnadirPeliculaPersonal.añadirPeliculaPersonal();
 					mostrarpelicules();
 					semafor = true;
@@ -204,7 +223,7 @@ public class Menu2 {
 					break;
 				case 6:
 
-					System.out.println("Has tornat l'inici->");
+					System.out.println("Has tornat al inici->");
 					semafor = true;
 					mostrarMenu2();
 					break;
@@ -215,7 +234,7 @@ public class Menu2 {
 				}
 
 			} catch (Exception e) {
-				System.out.print("Error: L'entrada no és un enter.");
+				System.out.print("Error: La entrada no és un enter.");
 				entrada.nextLine();
 				System.out.println("");
 				System.out.println("");
@@ -236,13 +255,13 @@ public class Menu2 {
 		while (!semafor) {
 			
 			System.out.println(" +--------------------------------------------+ ");
-			System.out.println(" |       Menú d'actors                        |");
+			System.out.println(" |       Menú de actors                       |");
 			System.out.println(" | 1. Mostrar llista general                  |");
 			System.out.println(" | 2. Mostrar llista personal                 |");
 			System.out.println(" | 3. Afegir actor a llista general           |");
 			System.out.println(" | 4. Afegir actor a llista personal          |");
 			System.out.println(" | 5. Eliminar actor de la llista personal    |");
-			System.out.println(" | 6. Tornar al menú d'inicio                 |");
+			System.out.println(" | 6. Tornar al menú de inicio                |");
 			System.out.println(" +--------------------------------------------+");
 
 			try {
@@ -250,7 +269,7 @@ public class Menu2 {
 				switch (opcio) {
 				case 1:
 
-					System.out.println("Llista general ->");
+					System.out.println("llista general ->");
 					AnadirActorsGeneral.mostrarActors();
 					mostraractors();
 					semafor = true;
@@ -283,7 +302,7 @@ public class Menu2 {
 					break;
 				case 6:
 
-					System.out.println("Has tornat a l'inici->");
+					System.out.println("Has tornat al inici->");
 					semafor = true;
 					mostrarMenu2();
 					break;
@@ -319,13 +338,13 @@ public class Menu2 {
 		boolean semafor = false;
 		while (!semafor) {
 
-			System.out.println(" +------------------------------+ ");
-			System.out.println(" |     Menú principal           |");
-			System.out.println(" | 1. Accedir menú directors    |");
-			System.out.println(" | 2. Accedir menú actors       |");
-			System.out.println(" | 3. Accedir menú pel·lícules  |");
-			System.out.println(" | 4. Tancar sessió             |");
-			System.out.println(" +------------------------------+ ");
+			System.out.println(" +----------------------------+ ");
+			System.out.println(" |     Menú principal         |");
+			System.out.println(" | 1. Accedir menú directors  |");
+			System.out.println(" | 2. Accedir menú actors     |");
+			System.out.println(" | 3. Accedir menú películes  |");
+			System.out.println(" | 4. Tancar sesió         |");
+			System.out.println(" +----------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
@@ -354,7 +373,7 @@ public class Menu2 {
 				}
 
 			} catch (Exception e) {
-				System.out.print("Error: L'entrada no és un enter.");
+				System.out.print("Error: La entrada no és un enter.");
 				entrada.nextLine();
 				System.out.println("");
 				System.out.println("");
@@ -380,7 +399,7 @@ public class Menu2 {
 			System.out.println(" | 1. Mostrar llista general                  |");
 			System.out.println(" | 2. Afegir actor a llista general           |");
 			System.out.println(" | 3. Eliminar actor de la llista general     |");
-			System.out.println(" | 4. Tornar al menú d'inicio                 |");
+			System.out.println(" | 4. Tornar al menú de inicio                |");
 			System.out.println(" +--------------------------------------------+ ");
 
 			try {
@@ -388,7 +407,7 @@ public class Menu2 {
 				switch (opcio) {
 				case 1:
 
-					System.out.println("Llista general ->");
+					System.out.println("llista general ->");
 					AnadirActorsGeneral.mostrarActors();
 					menuAdminActor();
 					semafor = true;
@@ -409,7 +428,7 @@ public class Menu2 {
 					
 				case 4:
 
-					System.out.println("Has tornat a l'inici->");
+					System.out.println("Has tornat al inici->");
 					mostrarMenu2Admin();
 					semafor = true;
 					break;
@@ -420,7 +439,7 @@ public class Menu2 {
 				}
 
 			} catch (Exception e) {
-				System.out.print("Error: L'entrada no és un enter.");
+				System.out.print("Error: La entrada no és un enter.");
 				entrada.nextLine();
 				System.out.println("");
 				System.out.println("");
@@ -441,7 +460,7 @@ public class Menu2 {
 		while (!semafor) {
 
 			System.out.println(" +---------------------------------------------+ ");
-			System.out.println(" |       Menú de director                      |");
+			System.out.println(" |       Menú de director                        |");
 			System.out.println(" | 1. Mostrar llista general                   |");
 			System.out.println(" | 2. Afegir director a llista general         |");
 			System.out.println(" | 3. Eliminar director de la llista general   |");
@@ -472,7 +491,7 @@ public class Menu2 {
 					break;
 				case 4:
 
-					System.out.println("Has tornat a l'inici->");
+					System.out.println("Has tornat al inici->");
 					semafor = true;
 					mostrarMenu2Admin();
 					break;
@@ -483,7 +502,7 @@ public class Menu2 {
 				}
 
 			} catch (Exception e) {
-				System.out.print("Error: L'entrada no és un enter.");
+				System.out.print("Error: La entrada no és un enter.");
 				entrada.nextLine();
 				System.out.println("");
 				System.out.println("");
@@ -503,27 +522,27 @@ public class Menu2 {
 		int opcio = 0;
 		while (!semafor) {
 
-			System.out.println(" +-------------------------------------------------+ ");
-			System.out.println(" |       Menú de pel·lícula                        |");
-			System.out.println(" | 1. Mostrar llista general                       |");
-			System.out.println(" | 2. Afegir pel·lícula a llista general           |");
-			System.out.println(" | 3. Eliminar pel·lícula de la llista general     |");
-			System.out.println(" | 4. Tornar al menú d'inici                       |");
-			System.out.println(" +-------------------------------------------------+ ");
+			System.out.println(" +-----------------------------------------------+ ");
+			System.out.println(" |       Menú de pelicula                          |");
+			System.out.println(" | 1. Mostrar llista general                     |");
+			System.out.println(" | 2. Afegir pelicula a llista general              |");
+			System.out.println(" | 3. Eliminar película de la llista general     |");
+			System.out.println(" | 4. Tornar al menú de inicio                   |");
+			System.out.println(" +-----------------------------------------------+ ");
 
 			try {
 				opcio = entrada.nextInt();
 				switch (opcio) {
 				case 1:
 
-					System.out.println("Llista general ->");
+					System.out.println("llista general ->");
 					AnadirPeliculaGeneral.mostrarPelicules();
 					menuAdminPelicula();
 					semafor = true;
 					break;
 				case 2:
 
-					System.out.println("Afegir pel·lícula a la llista general->");
+					System.out.println("Afegir pelicula a la llista general->");
 					AnadirPeliculaGeneral.pedirInfo();
 					menuAdminPelicula();
 					semafor = true;
@@ -534,7 +553,7 @@ public class Menu2 {
 					break;
 				case 4:
 
-					System.out.println("Has tornat a l'inici->");
+					System.out.println("Has tornat al inici->");
 					semafor = true;
 					mostrarMenu2Admin();
 					break;
@@ -545,7 +564,7 @@ public class Menu2 {
 				}
 
 			} catch (Exception e) {
-				System.out.print("Error: L'entrada no és un enter.");
+				System.out.print("Error: La entrada no és un enter.");
 				entrada.nextLine();
 				System.out.println("");
 				System.out.println("");

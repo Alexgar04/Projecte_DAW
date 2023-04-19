@@ -12,12 +12,20 @@ public class Pelicula implements Serializable {
 	private int año;
 	private String pais;
 	private String genero;
+	private String nomCreador;
 
 	// Constructor de la clase Pelicula
 	public Pelicula(String titulo, int año, int id) {
 		this.titulo = titulo;
 		this.año = año;
 		this.id = id;
+	}
+	
+	public Pelicula(String titulo, int año, int id, String nomCreador) {
+		this.titulo = titulo;
+		this.año = año;
+		this.id = id;
+		this.nomCreador=nomCreador;
 	}
 
 	// Métodos getter y setter para cada atributo	
@@ -46,6 +54,14 @@ public class Pelicula implements Serializable {
 	}
 
 	public String toString() {
-		return "Id: " +this.id+ " Títol: " + this.titulo + " / Any: " + this.año;
+		return "Id: " +this.id+ " Titul: " + this.titulo + " / Año: " + this.año+ " / Creador: "+this.nomCreador;
+	}
+
+	public String getNomCreador() {
+		return nomCreador;
+	}
+
+	public void setNomCreador(String nomCreador) {
+		this.nomCreador = nomCreador;
 	}
 }

@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 import com.projecte.eric.Menu2;
 import com.projecte.hector.ComprobarPelicula;
+import com.projecte.hector.IniciSesio;
+import com.projecte.miquel.Usuari;
 import com.projecte.sergi.Pelicula;
 
 public class AnadirPeliculaGeneral {
@@ -36,16 +38,17 @@ public class AnadirPeliculaGeneral {
 		int any;
 		boolean difer = false;
 		int id;
+		String nomCreador;
 		do {
 
-			System.out.println("Què pel·lícula vols afegir?");
+			System.out.println("Dime que película vols");
 			pelicula = nomPelicula();
 			difer = ComprobarPelicula.comprobarPelicula(pelicula);
-			System.out.println("De quin any és la pel·lícula");
+			System.out.println("De quin any es la pelicula");
 			any = anyPelicula();
 			id = saberId(true);
 
-			System.out.println(difer);
+			
 		} while (difer);
 
 		// Llegir datos existents en el codi per a que no sobreescribisca els datos
@@ -61,7 +64,8 @@ public class AnadirPeliculaGeneral {
 			e.printStackTrace();
 		}
 
-		Pelicula p = new Pelicula(pelicula, any, id);
+		
+		Pelicula p = new Pelicula(pelicula, any, id,IniciSesio.arrayLinea[1]);
 		pelicules.add(p);
 
 		ObjectOutputStream oos = null;
@@ -94,9 +98,9 @@ public class AnadirPeliculaGeneral {
 	public static void ficarPeliculesDefecte() {
 		File f = new File("Dades/PeliculesGenerals.dades");
 		if (!f.exists()) {
-			pelicules.add(new Pelicula("Avatar", 2010, 1));
-			pelicules.add(new Pelicula("Campeones", 2018, 2));
-			pelicules.add(new Pelicula("Seven", 2004, 3));
+			pelicules.add(new Pelicula("Avatar", 2010, 1,"Default"));
+			pelicules.add(new Pelicula("Campeones", 2018, 2,"Default"));
+			pelicules.add(new Pelicula("Seven", 2004, 3,"Default"));
 			ObjectOutputStream oos = null;
 			FileOutputStream fout = null;
 			try {
@@ -132,7 +136,7 @@ public class AnadirPeliculaGeneral {
 			try {
 				// llegim l'objecte que hi ha al fitxer (1 sol array List)
 				pelicules = (ArrayList<Pelicula>) reader.readObject();
-				System.out.println("Pel·lícules en la llista general");
+				System.out.println("Películes en la llista general");
 				System.out.println(
 						" +----------------------------------------------------------------------------------------+ ");
 				for (Pelicula usuari : pelicules) {
@@ -148,7 +152,7 @@ public class AnadirPeliculaGeneral {
 			file.close();
 			Menu2 m = new Menu2();
 		} catch (Exception ex) {
-			System.out.println("No hi ha pel·lícules encara, fica'n");
+			System.out.println("No hi han pelicules encara, fica'n");
 		}
 	}
 
@@ -198,12 +202,12 @@ public class AnadirPeliculaGeneral {
 		int n;
 		do {
 			while (!entrada.hasNextInt()) {
-				System.out.println("El valor introduït no és un número");
+				System.out.println("El valor introduit no és un número");
 				entrada.next();
 			}
 			n = entrada.nextInt();
 			if (n < 1940 || n > 2023) {
-				System.out.println("El valor introduït està fora del rang");
+				System.out.println("El valor introduit está fora del rang");
 			}
 		} while (n < 1940 || n > 2023);
 
@@ -219,14 +223,14 @@ public class AnadirPeliculaGeneral {
 		    e.printStackTrace();
 		}
 		
-			System.out.println("Introdueix l'Id de la pel·lícula que vols eliminar, per a cancel·lar l'operació escriu \"0\"");
+			System.out.println("Introdueix el Id de la película que vols eliminar, per a cancelar l'operació escriu \"0\"");
 			if (!entrada.hasNextInt()) {
-				System.out.println("El que has introduït, no és un número");
+				System.out.println("Lo que has introduit, no es un número");
 				entrada.nextLine();
 			} else {
 				num = entrada.nextInt();
 				while(num < 0 || num > 2147483647) {
-					System.out.println("Número invàlid");
+					System.out.println("Numero invalido");
 					num = entrada.nextInt();
 				}
 				if (num == 0) {
@@ -245,9 +249,9 @@ public class AnadirPeliculaGeneral {
 					}
 
 					if (encontrado) {
-						System.out.println("S'ha eliminat una pel·lícula amb l'id " + num + ".");
+						System.out.println("S'ha eliminat una película amb el id " + num + ".");
 					} else {
-						System.out.println("No s'ha encontrat cap pel·lícula amb l'id " + num + ".");
+						System.out.println("No s'ha encontrat ningúna película amb el id " + num + ".");
 					}
 
 					// Serialitzar el ArrayList actualitzat en el arxiu

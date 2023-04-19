@@ -31,7 +31,7 @@ public class AnadirPeliculaPersonal {
 	public static void añadirPeliculaPersonal() {
 		Scanner entrada = new Scanner(System.in);
 		mostrarPeliculasPersonal();
-		System.out.println("Què pel·lícula vols afegir a la teua llista?");
+		System.out.println("Que pelicula vols anyadir a la teua llista");
 		AnadirPeliculaGeneral.mostrarPelicules();
 		int n = 0;
 		int num_max = idPeli();
@@ -43,7 +43,7 @@ public class AnadirPeliculaPersonal {
 			n = entrada.nextInt();
 			
 			if(n < 0 || n > num_max) {
-				System.out.println("El valor està fora del rang");
+				System.out.println("El valor esta fora del rang");
 			}
 		}while(n < 0 || n > num_max);
 		
@@ -68,14 +68,14 @@ public class AnadirPeliculaPersonal {
 		            boolean encontrada = false;
 		            for (Pelicula peliculaPer: peliculesPersonals) {
 		                if (n == peliculaPer.getId()) {
-		                    System.out.println("Error el que has introduït ja està en la llista personal");
+		                    System.out.println("Error lo que has introducido ya esta en la lista personal");
 		                    encontrada = true;
 		                    break;
 		                }
 		            }
 		            if (!encontrada) {
 		                peliculesPersonals.add(pelicula);
-		                System.out.println("Pelicula afegida");
+		                System.out.println("Pelicula añadida");
 		            	ObjectOutputStream oos = null;
 						FileOutputStream fout = null;
 						try {
@@ -135,12 +135,17 @@ public class AnadirPeliculaPersonal {
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				peliculesPersonals = (ArrayList<Pelicula>) reader.readObject();
-				System.out.println("Pel·lícules en la llista personal");
-				System.out.println(" +----------------------------------------------------------------------------------------+ ");
-				for (Pelicula usuari : peliculesPersonals) {
-					  System.out.println(usuari.toString());
-					}
-				System.out.println(" +----------------------------------------------------------------------------------------+ ");
+				if (peliculesPersonals.size() > 0) {
+					System.out.println("Pelicules en la llista personal");
+					System.out.println(" +----------------------------------------------------------------------------------------+ ");
+					for (Pelicula usuari : peliculesPersonals) {
+						  System.out.println(usuari.toString());
+						}
+					System.out.println(" +----------------------------------------------------------------------------------------+ ");
+				}else {
+					System.out.println("No hi ha cap en la llista");
+				}
+				
 			} catch (Exception ex) {
 				System.err.println("Final del fitxer");
 			}
@@ -148,7 +153,7 @@ public class AnadirPeliculaPersonal {
 			reader.close();
 			file.close();
 		} catch (Exception ex) {
-			System.out.println("No hi ha pel·lícules en la llista personal encara, fica'n");
+			System.out.println("No hi han pelicules en la llista personal encara, fica'n");
 		}
 	}
 	public static void eliminarPelicula() {
@@ -159,15 +164,15 @@ public class AnadirPeliculaPersonal {
 			boolean encontrado = false;
 			do {
 				do {
-					System.out.println("Què pel·lícula vols eliminar?");
-					System.out.println("Si vols cancel·lar fica: " + numCancelar);
+					System.out.println("Que pelicula vols eliminar");
+					System.out.println("Si vols cancelar fica: " + numCancelar);
 					while (!entrada.hasNextInt()) {
-						System.out.println("El valor no és un número");
+						System.out.println("El valor no es un número");
 						entrada.next();
 					}
 					numUsuario = entrada.nextInt();
 					if (numUsuario < 0 || numUsuario > 2147483647) {
-						System.out.println("El número està fora del rang");
+						System.out.println("El número esta fora del rang");
 					}
 				} while (numUsuario < 0 || numUsuario > 2147483647);
 				// LLevar a partir del contador, el getId() i el numUsuari borrar el director si
@@ -182,15 +187,15 @@ public class AnadirPeliculaPersonal {
 				// Si el id del director no esta en ixe rang de numeros se indica i se torna a
 				// demanar el id a eliminar
 				if (!encontrado && numUsuario != numCancelar) {
-					System.out.println("La pel·lícula eixa no està en la llista personal");
+					System.out.println("La pelicula ixe no esta en la llista personal");
 				}
 				if (numUsuario == numCancelar) {
-					System.out.println("Has elegit cancel·lar l'eliminació");
+					System.out.println("Has elegit cancelar la eliminació");
 				}
 			} while (!encontrado && numUsuario != numCancelar);
 
 			if (encontrado) {
-				System.out.println("S'ha eliminat correctament la pel·lícula");
+				System.out.println("S'ha eliminat correctament la pelicula");
 				String nomUsuari = IniciSesio.getUsuario();
 
 				ObjectOutputStream oos = null;

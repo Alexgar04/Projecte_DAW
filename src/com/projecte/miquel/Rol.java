@@ -5,7 +5,7 @@ public class Rol {
 	//Atributs
 		protected String nom;
 		protected String contraseña;
-		protected String correo;
+		protected static String correo;
 		
 		//Constructor
 		public Rol(String nom, String contraseña, String correo) {
@@ -27,7 +27,7 @@ public class Rol {
 		public void setContraseña(String contraseña) {
 			this.contraseña = contraseña;
 		}
-		public String getCorreo() {
+		public static String getCorreo() {
 			return correo;
 		}
 		public void setCorreo(String correo) {

@@ -1,5 +1,6 @@
 package com.projecte.alex;
 
+import com.projecte.eric.FinestraAdeu;
 import com.projecte.hector.IniciSesio;
 
 public class Comprobacion {
@@ -13,7 +14,9 @@ public class Comprobacion {
         } else if(opcionUser == 2){
             Registro reg = new Registro(opcionUser);
         }else {
-        	System.exit(0);
+        	FinestraAdeu finestra = new FinestraAdeu();
+            finestra.initComponents();
+        	finestra.setVisible(true);
         }
 	}
 }

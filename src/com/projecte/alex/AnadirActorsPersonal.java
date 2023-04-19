@@ -15,6 +15,8 @@ import com.projecte.sergi.Actor;
 
 public class AnadirActorsPersonal {
 	private static List<Actor> actorsPersonals = new ArrayList<Actor>();
+	
+	
 	static Scanner entrada = new Scanner(System.in);
 	private String nomUsuari;
 	
@@ -31,7 +33,7 @@ public class AnadirActorsPersonal {
 	public static void añadirActorPersonal() {
 		Scanner entrada = new Scanner(System.in);
 		mostrarActorsPersonal();
-		System.out.println("Què actor vols afegir a la teua llista?");
+		System.out.println("Que actor vols anyadir a la teua llista");
 		AnadirActorsGeneral.mostrarActors();
 		
 		int n = 0;
@@ -44,7 +46,7 @@ public class AnadirActorsPersonal {
 			n = entrada.nextInt();
 			
 			if(n < 0 || n > num_max) {
-				System.out.println("El valor està fora del rang");
+				System.out.println("El valor esta fora del rang");
 			}
 		}while(n < 0 || n > num_max);
 		
@@ -69,14 +71,14 @@ public class AnadirActorsPersonal {
 		        boolean encontrada = false;
 	            for (Actor actorPer: actorsPersonals) {
 	                if (n == actorPer.getId()) {
-	                    System.out.println("Error el que has introduït ja està en la lista personal");
+	                    System.out.println("Error lo que has introducido ya esta en la lista personal");
 	                    encontrada = true;
 	                    break;
 	                }
 	            }
 	            if (!encontrada) {
 					actorsPersonals.add(actor);
-	                System.out.println("Actor afegit");
+	                System.out.println("Actor añadido");
 	                ObjectOutputStream oos = null;
 					FileOutputStream fout = null;
 					try {
@@ -132,12 +134,17 @@ public class AnadirActorsPersonal {
 			try {
 				//llegim l'objecte que hi ha al fitxer (1 sol array List)
 				actorsPersonals = (ArrayList<Actor>) reader.readObject();
-				System.out.println("Actors en la llista personal");
-				System.out.println(" +----------------------------------------------------------------------------------------+ ");
-				for (Actor actor : actorsPersonals) {
-					  System.out.println(actor.toString());
-					}
-				System.out.println(" +----------------------------------------------------------------------------------------+ ");
+				if (actorsPersonals.size() > 0) {
+					System.out.println("Actors en la llista personal");
+					System.out.println(" +----------------------------------------------------------------------------------------+ ");
+					for (Actor actor : actorsPersonals) {
+						  System.out.println(actor.toString());
+						}
+					System.out.println(" +----------------------------------------------------------------------------------------+ ");
+				}else {
+					System.out.println("No hi ha cap en la llista");
+				}
+
 			} catch (Exception ex) {
 				System.err.println("Final del fitxer");
 			}
@@ -145,7 +152,7 @@ public class AnadirActorsPersonal {
 			reader.close();
 			file.close();
 		} catch (Exception ex) {
-			System.out.println("No hi ha actors en la llista personal encara, fica'n");
+			System.out.println("No hi han actors en la llista personal encara, fica'n");
 		}
 	}
 	public static void eliminarActor() {
@@ -156,15 +163,15 @@ public class AnadirActorsPersonal {
 			boolean encontrado = false;
 			do {
 				do {
-					System.out.println("Què actor vols eliminar?");
-					System.out.println("Si vols cancel·lar fica: " + numCancelar);
+					System.out.println("Que actor vols eliminar");
+					System.out.println("Si vols cancelar fica: " + numCancelar);
 					while (!entrada.hasNextInt()) {
-						System.out.println("El valor no és un número");
+						System.out.println("El valor no es un número");
 						entrada.next();
 					}
 					numUsuario = entrada.nextInt();
 					if (numUsuario < 0 || numUsuario > 2147483647) {
-						System.out.println("El número està fora del rang");
+						System.out.println("El número esta fora del rang");
 					}
 				} while (numUsuario < 0 || numUsuario > 2147483647);
 				// LLevar a partir del contador, el getId() i el numUsuari borrar el director si
@@ -179,15 +186,15 @@ public class AnadirActorsPersonal {
 				// Si el id del director no esta en ixe rang de numeros se indica i se torna a
 				// demanar el id a eliminar
 				if (!encontrado && numUsuario != numCancelar) {
-					System.out.println("L'actor eixe no està en la llista personal");
+					System.out.println("El actor ixe no esta en la llista personal");
 				}
 				if (numUsuario == numCancelar) {
-					System.out.println("Has elegit cancel·lar l'eliminació");
+					System.out.println("Has elegit cancelar la eliminació");
 				}
 			} while (!encontrado && numUsuario != numCancelar);
 
 			if (encontrado) {
-				System.out.println("S'ha eliminat correctament l'actor");
+				System.out.println("S'ha eliminat correctament el actor");
 				String nomUsuari = IniciSesio.getUsuario();
 
 				ObjectOutputStream oos = null;

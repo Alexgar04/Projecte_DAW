@@ -28,7 +28,7 @@ public class ComprobarDirector {
 
 				String nombre = director.getNombre().trim();
 				if (nom.equalsIgnoreCase(nombre)) {
-					System.out.println("Està repetit");
+					System.out.println("Está repetit");
 					Menu2 menu2 = new Menu2();
 					menu2.mostrardirectors();
 					 

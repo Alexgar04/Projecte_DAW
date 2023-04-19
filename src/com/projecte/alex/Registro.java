@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import com.projecte.alex.Rol_usuario.ROL;
 import com.projecte.sergi.Usuari;
 
 public class Registro{
@@ -96,13 +97,20 @@ public class Registro{
 
 		int id = leerId();
 		String nombreUser = sacarNombreUser(id, correo);
-		escribirInformacion(id, nombreUser, nombre, nomApell, poblacion, contraseña, correo);
+		//Si registrem un usuari desde el programa sempre sera usuari
+		ROL rol = ROL.USUARIO;
+		escribirInformacion(id, nombreUser, nombre, nomApell, poblacion, contraseña, correo, rol);
 		desSerializar();
-		anadirUsuario(id, nombreUser, nombre, nomApell, poblacion, contraseña, correo);
+		anadirUsuario(id, nombreUser, nombre, nomApell, poblacion, contraseña, correo, rol);
 		serializar();
+		String salt = Contrasenyes.generarSalt();
+		String hash = Contrasenyes.generarHash(contraseña, salt);
+		
+		Contrasenyes.escribirInfo(nombreUser, salt, hash);
 		crearCarpetaInicial(nombreUser);
 		crearCarpetaSecundaria(nombreUser);
 		crearArchivos(nombreUser);
+		
 
 	}
 	
@@ -155,10 +163,9 @@ public class Registro{
 	}
 	
 	public void anadirUsuario(int id, String nomUser, String nombreUser, String nomApell, String poblacion,
-			String contrasenya, String correo) {
-		Usuari user = new Usuari(id, nombreUser, nomUser, nomApell, poblacion, contrasenya, correo);
-		usuaris.add(user);
-		
+			String contrasenya, String correo, ROL rol) {
+		Usuari user = new Usuari(id, nombreUser, nomUser, nomApell, poblacion, contrasenya, correo, rol);
+		usuaris.add(user);		
 	}
 
 	public void crearArchivos(String nomUser) {
@@ -180,7 +187,7 @@ public class Registro{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		Imagen.imagenDefecto(nomUser);
 		mensajeBienvenida(nomUser);
 
 	}
@@ -262,7 +269,7 @@ public class Registro{
 	}
 
 	public void escribirInformacion(int id, String nomUser, String nombreUser, String nomApell, String poblacion,
-			String contraseña, String correo) {
+			String contraseña, String correo, ROL rol) {
 		File escInfo = new File("UsersInfo/UsersInfo.txt");
 		
 //		Path origen = Paths.get("imagenes/imagen.jpg");
@@ -271,7 +278,7 @@ public class Registro{
 		try {
 			FileWriter escribir = new FileWriter(escInfo, true);
 			escribir.write(+id + "::" + nomUser + "::" + nombreUser + "::" + nomApell + "::" + correo + "::" + poblacion
-					+ "::" + contraseña + "::" + "\n");
+					+ "::" + "X"+ "::" + rol + "::" + "defecto.png::"+"\n");
 			escribir.close();
 
 		} catch (Exception e) {
